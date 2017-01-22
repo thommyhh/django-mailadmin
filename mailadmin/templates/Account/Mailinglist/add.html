@@ -1,0 +1,37 @@
+{% extends 'single.html' %}
+
+{% block title %}Add account {{account.name}}@{{domain.name}} to mailing list - {{block.super}}{% endblock %}
+{% block title-text %}Add account to mailing list{% endblock %}
+
+{% block form %}
+<form action="{% url 'mailAdmin:accountMailinglistAdd' account.domain.name account.name %}" method="post">
+    {% csrf_token %}
+    {{ block.super }}
+</form>
+{% endblock %}
+
+{% block content %}
+<div class="l-grid">
+    <div class="l-grid__item l-grid__item--halfs-md">
+        <div class="c-box">
+            <h3 class="c-box__title">Choose mailing list</h3>
+            <div class="c-box__content">
+                <label for="{{form.mailing_list.id_for_label}}">Mailing list</label>
+                {% if form.mailing_list.errors|length > 0 %}
+                <p class="c-label--error">
+                    {% for error in form.mailing_list.errors %}
+                    {{ error }}
+                    {% endfor %}
+                </p>
+                {% endif %}
+                <select id="{{form.mailing_list.id_for_label}}" name="{{form.mailing_list.html_name}}" {% if form.mailing_list.errors|length > 0 %}class="has-error"{% endif %}>
+                    <option value=""></option>
+                    {% for mailing_list in form.fields.mailing_list.queryset %}
+                    <option value="{{mailing_list.pk}}" {% if mailing_list.pk == form.mailing_list.value|add:0 %} selected="selected"{% endif %}>{{mailing_list}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

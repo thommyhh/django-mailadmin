@@ -1,0 +1,6 @@
+/dist/
+/django_mailadmin.egg-info/
+
+# exclude python cache
+__pycache__
+

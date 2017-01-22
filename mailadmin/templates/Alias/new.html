@@ -1,0 +1,48 @@
+{% extends 'single.html' %}
+
+{% block title %}Create alias - {{block.super}}{% endblock %}
+{% block title-text %}Create alias{% endblock %}
+
+{% block form %}
+<form action="{% url 'mailAdmin:aliasNew' domain.name %}" method="post" autocomplete="off">
+    {% csrf_token %}
+    <input type="hidden" name="domain" value="{{ domain.pk }}" />
+    {{ block.super }}
+</form>
+{% endblock %}
+
+{% block content %}
+<div class="l-grid">
+    <div class="l-grid__item l-grid__item--halfs-md">
+        <div class="c-box">
+            <h3 class="c-box__title">Settings</h3>
+            <div class="c-box__content">
+                <label for="name">Name (...@{{ domain.name }})</label>
+                {% if form.name.errors|length > 0 %}
+                <p class="c-label--error">
+                    {% for error in form.name.errors %}
+                    {{ error }}
+                    {% endfor %}
+                </p>
+                {% endif %}
+                <input{% if form.name.errors|length > 0 %} class="has-error"{% endif %} type="text" id="name" name="name" value="{{ form.instance.name }}" placeholder="Account name before the '@'" />
+
+                <label for="account">Target account</label>
+                {% if form.account.errors|length > 0 %}
+                <p class="c-label--error">
+                    {% for error in form.account.errors %}
+                    {{ error }}
+                    {% endfor %}
+                </p>
+                {% endif %}
+                <select{% if form.name.errors|length > 0 %} class="has-error"{% endif %} id="account" name="account">
+                    <option value=""></option>
+                    {% for account in domain.account_set.all %}
+                    <option value="{{ account.pk }}" {% if account.pk == form.instance.account %}selected="selected"{% endif %}>{{ account }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

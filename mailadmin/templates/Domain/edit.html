@@ -1,0 +1,26 @@
+{% extends 'single.html' %}
+
+{% block title %}Edit domain "{{domain.name}}"{% endblock %}
+{% block title-text %}{{domain.name}}{% endblock %}
+
+{% block form %}
+<form action="{% url 'mailAdmin:domainEdit' form.instance.name %}" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="active" value="" />
+    {{ block.super }}
+</form>
+{% endblock %}
+
+{% block content %}
+<div class="l-grid">
+    <div class="l-grid__item l-grid__item--halfs-md">
+        <div class="c-box">
+            <h3 class="c-box__title">Settings</h3>
+            <div class="c-box__content">
+                <input type="checkbox" id="{{form.active.id_for_label}}" name="{{form.active.html_name}}" value="1" {% if domain.active %}checked="checked"{% endif %} />
+                <label for="{{form.active.id_for_label}}">Active ?</label>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

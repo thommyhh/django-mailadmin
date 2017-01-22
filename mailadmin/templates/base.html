@@ -1,0 +1,198 @@
+{% extends "frame.html" %}
+{% load staticfiles %}
+{% load permissions %}
+{% block body %}
+<div class="l-container">
+    <div class="l-container__header">
+        <header class="c-action-bar c-action-bar--dark">
+            <div class="c-action-bar__group">
+                <a href="{% url 'mailAdmin:domainIndex' %}" class="c-logo c-logo--light">
+                    <svg class="c-logo__icon c-logo__icon--header">
+                        <use xlink:href="{% static 'mailadmin/img/logo.svg' %}#logo"/>
+                    </svg>
+                    <span class="c-logo__text c-logo__text--header">MailAdmin</span>
+                </a>
+            </div>
+
+            <div class="c-action-bar__group c-action-bar__group--flexible c-action-bar__group--top"></div>
+
+            <div class="c-action-bar__group c-action-bar__group--shrink">
+                <div class="c-dropdown  js-form-autocomplete">
+                    <label for="domain" class="u-sr-only">Search Domain</label>
+                    <input type="text" id="domain" placeholder="Search Domain" autocomplete="off"
+                           class="c-input--dark  c-dropdown__input  js-form-autocomplete-input">
+
+                    <div class="c-dropdown__panel c-dropdown__panel--full  js-form-autocomplete-panel">
+                        <ul class="c-dropdown__list">
+                            <li class="c-dropdown__item"><a href="#" class="c-dropdown__link">awesome-pictures.com</a>
+                            </li>
+                            <li class="c-dropdown__item"><a href="#" class="c-dropdown__link">business.biz</a></li>
+                            <li class="c-dropdown__item"><a href="#" class="c-dropdown__link">crazy-professor.net</a>
+                            </li>
+                            <li class="c-dropdown__item"><a href="#" class="c-dropdown__link">domain-example.hamburg</a>
+                            </li>
+                            <li class="c-dropdown__item"><a href="#"
+                                                            class="c-dropdown__link">example-domain-name.com</a></li>
+
+                            <li class="c-dropdown__item"><a href="#" class="c-dropdown__link c-dropdown__link--muted">Footer
+                                Link</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="c-action-bar__group">
+                <div class="c-dropdown  js-dropdown">
+                    <button class="c-button c-button--icon  c-dropdown__button  js-toggle-button">
+                        <svg class="c-button__icon">
+                            <use xlink:href="{% static 'mailadmin/img/icons.svg' %}#account"/>
+                        </svg>
+                        <span class="c-button__text  u-sr-only">Dropdown</span>
+                        <svg class="c-dropdown__icon">
+                            <use xlink:href="{% static 'mailadmin/img/icons.svg' %}#dropdown"/>
+                        </svg>
+                    </button>
+
+                    <div class="c-dropdown__panel c-dropdown__panel--to-left c-dropdown__panel--menu  js-toggle-panel">
+                        <ul class="c-dropdown__list">
+                            <li class="c-dropdown__item"><a href="#" class="c-dropdown__link">This is a dropdown menu
+                                list item</a></li>
+                            <li class="c-dropdown__item"><a href="#" class="c-dropdown__link">This is a dropdown menu
+                                list item</a></li>
+                            <li class="c-dropdown__item"><a href="#" class="c-dropdown__link">This is a dropdown menu
+                                list item</a></li>
+                            <li class="c-dropdown__item"><a href="#" class="c-dropdown__link">This is a dropdown menu
+                                list item</a></li>
+
+                            <li class="c-dropdown__item"><a href="#" class="c-dropdown__link c-dropdown__link--muted">Footer
+                                Link</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="c-action-bar__group">
+                <a href="{% url 'mailAdmin:logout' %}" class="c-button c-button--icon">
+                    <svg class="c-button__icon">
+                        <use xlink:href="{% static 'mailadmin/img/icons.svg' %}#power"/>
+                    </svg>
+                    <span class="c-button__text u-sr-only">Log off</span>
+                </a>
+            </div>
+        </header>
+    </div>
+
+    <div class="l-container__content">
+        {% block sidebar %}
+        <div class="c-nav-sidebar-cover  js-sidebar-cover"></div>
+        <aside class="l-container__sidebar  js-sidebar">
+            <nav class="c-nav-sidebar">
+                <ul class="c-nav-sidebar__list">
+                    {% block sidebar-items %}
+                    {% has_permission 'domain_admin' as is_domain_admin %}
+                    {% if is_domain_admin %}
+                    <li class="c-nav-sidebar__item">
+                        <a href="{% url 'mailAdmin:domainIndex' %}"
+                           class="c-nav-sidebar__link c-nav-sidebar__link--muted">
+                            <svg class="c-nav-sidebar__icon">
+                                <use xlink:href="{% static 'mailadmin/img/icons.svg' %}#arrow-back"/>
+                            </svg>
+                            Domain List
+                        </a>
+                    </li>
+                    <li class="c-nav-sidebar__item c-nav-sidebar__item--header">
+                        <span class="c-nav-sidebar__link">
+                            <span class="c-nav-sidebar__item__title">Domain</span>
+                            <span class="c-nav-sidebar__item__info">{{domain.name}}</span>
+                        </span>
+                    </li>
+                    <li class="c-nav-sidebar__item">
+                        <a href="{% url 'mailAdmin:domainEdit' domain.name %}"
+                           class="c-nav-sidebar__link{% if menu_section == 'Domain' %} c-nav-sidebar__link--highlight{% endif %}">Settings</a>
+                    </li>
+                    <li class="c-nav-sidebar__item">
+                        <a href="{% url 'mailAdmin:domainAccounts' domain.name %}"
+                           class="c-nav-sidebar__link{% if menu_section == 'Account' %} c-nav-sidebar__link--highlight{% endif %}">Accounts</a>
+                    </li>
+                    <li class="c-nav-sidebar__item">
+                        <a href="{% url 'mailAdmin:domainAliases' domain.name %}"
+                           class="c-nav-sidebar__link{% if menu_section == 'Alias' %} c-nav-sidebar__link--highlight{% endif %}">Aliases</a>
+                    </li>
+                    <li class="c-nav-sidebar__item">
+                        <a href="{% url 'mailAdmin:domainLists' domain.name %}"
+                           class="c-nav-sidebar__link{% if menu_section == 'Mailinglist' %} c-nav-sidebar__link--highlight{% endif %}">Mailing
+                            Lists</a>
+                    </li>
+                    <li class="c-nav-sidebar__item">
+                        <a href="{% url 'mailAdmin:domainRedirects' domain.name %}"
+                           class="c-nav-sidebar__link{% if menu_section == 'Redirect' %} c-nav-sidebar__link--highlight{% endif %}">Forwards</a>
+                    </li>
+                    {% endif %}
+                    {% if 'Mailinglist_' in menu_section %}
+                    <li class="c-nav-sidebar__item c-nav-sidebar__item--header">
+                        <span class="c-nav-sidebar__link">
+                            <span class="c-nav-sidebar__item__title">Mailing list</span>
+                            <span class="c-nav-sidebar__item__info">{{list.name}}@{{domain.name}}</span>
+                        </span>
+                    </li>
+                    <li class="c-nav-sidebar__item">
+                        <a href="{% url 'mailAdmin:mailinglistAccounts' domain.name list.name %}"
+                           class="c-nav-sidebar__link{% if menu_section == 'Mailinglist_Account' %} c-nav-sidebar__link--highlight{% endif %}">Accounts</a>
+                    </li>
+                    <li class="c-nav-sidebar__item">
+                        <a href="{% url 'mailAdmin:mailinglistExternals' domain.name list.name %}"
+                           class="c-nav-sidebar__link{% if menu_section == 'Mailinglist_ExternalReceiver' %} c-nav-sidebar__link--highlight{% endif %}">External recipients</a>
+                    </li>
+                    {% endif %}
+                    {% if 'Account_' in menu_section %}
+                    <li class="c-nav-sidebar__item c-nav-sidebar__item--header">
+                        <span class="c-nav-sidebar__link">
+                            <span class="c-nav-sidebar__item__title">Account</span>
+                            <span class="c-nav-sidebar__item__info">{{account.name}}@{{domain.name}}</span>
+                        </span>
+                    </li>
+                    <li class="c-nav-sidebar__item">
+                        <a href="{% url 'mailAdmin:accountEdit' account.domain.name account.name %}"
+                           class="c-nav-sidebar__link{% if menu_section == 'Account_Settings' %} c-nav-sidebar__link--highlight{% endif %}">Settings</a>
+                    </li>
+                    <li class="c-nav-sidebar__item">
+                        <a href="{% url 'mailAdmin:accountAliases' account.domain.name account.name %}"
+                           class="c-nav-sidebar__link{% if menu_section == 'Account_Alias' %} c-nav-sidebar__link--highlight{% endif %}">Aliases</a>
+                    </li>
+                    {% if is_domain_admin %}
+                    <li class="c-nav-sidebar__item">
+                        <a href="{% url 'mailAdmin:accountMailinglists' account.domain.name account.name %}"
+                           class="c-nav-sidebar__link{% if menu_section == 'Account_Mailinglist' %} c-nav-sidebar__link--highlight{% endif %}">Mailing lists</a>
+                    </li>
+                    {% endif %}
+                    {% endif %}
+                    {% endblock %}
+                </ul>
+            </nav>
+        </aside>
+        {% endblock %}
+
+        <main class="l-container__main{% if sidebar_active %} l-container__main--sidebar{% endif %}">
+            {% block form %}
+            <div class="c-action-bar">
+                {% block sidebar-button %}
+                <div class="c-action-bar__group  u-hide-lg u-hide-xl">
+                    <button type="button" class="c-icon-button  js-sidebar-button">
+                        <svg class="c-icon-button__icon">
+                            <use xlink:href="{% static 'mailadmin/img/icons.svg' %}#menu"/>
+                        </svg>
+                        <span class="u-sr-only">Open Menu</span>
+                    </button>
+                </div>
+                {% endblock %}
+
+                {% block actionbar %}{% endblock %}
+                {% block actionbar-button %}{% endblock %}
+            </div>
+            {% block content %}
+            {% endblock %}
+            {% endblock %}
+        </main>
+    </div>
+</div>
+{% endblock body %}

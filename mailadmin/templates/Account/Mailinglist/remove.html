@@ -1,0 +1,33 @@
+{% extends 'single.html' %}
+{% load staticfiles %}
+
+{% block title %}Remove account {{account}} from mailing list {{mailing_list}}{% endblock %}
+{% block title-text %}Remove account from mailing list {{mailing_list}}{% endblock %}
+{% block actionbar-button %}{% endblock %}
+
+{% block form %}
+<form action="{% url 'mailAdmin:accountMailinglistRemove' domain.name account.name mailing_list.pk %}" method="post">
+    {% csrf_token %}
+    {{ block.super }}
+</form>
+{% endblock %}
+
+{% block content %}
+<div class="l-grid">
+    <div class="l-grid__item l-grid__item--halfs-md">
+        <div class="c-box">
+            <h3 class="c-box__title">Remove account from mailing list {{mailing_list}}?</h3>
+            <div class="c-box__content">
+                <p>Do you want to delete the account {{account}} form the mailing list {{mailing_list}}?</p>
+                <div class="c-button-row">
+                    <a href="{% url 'mailAdmin:accountMailinglists' account.domain.name account.name %}" class="c-button">Cancel</a>
+                    <button type="submit" class="c-button c-button--highlight c-button--icon">
+                        <svg class="c-button__icon"><use xlink:href="{% static 'mailadmin/img/icons.svg' %}#delete"/></svg>
+                        <span class="c-button__text">Remove</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

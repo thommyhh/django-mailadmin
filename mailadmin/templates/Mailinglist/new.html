@@ -1,0 +1,33 @@
+{% extends 'single.html' %}
+
+{% block title %}Create mailing list - {{block.super}}{% endblock %}
+{% block title-text %}Create mailing list{% endblock %}
+
+{% block form %}
+<form action="{% url 'mailAdmin:mailinglistNew' domain.name %}" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="domain" value="{{ domain.pk }}" />
+    {{ block.super }}
+</form>
+{% endblock %}
+
+{% block content %}
+<div class="l-grid">
+    <div class="l-grid__item l-grid__item--halfs-md">
+        <div class="c-box">
+            <h3 class="c-box__title">Settings</h3>
+            <div class="c-box__content">
+                <label for="name">Name (...@{{ domain.name }})</label>
+                {% if form.name.errors|length > 0 %}
+                <p class="c-label--error">
+                    {% for error in form.name.errors %}
+                    {{ error }}
+                    {% endfor %}
+                </p>
+                {% endif %}
+                <input type="text" id="name" name="name" value="{{ form.instance.name }}" placeholder="List name before the '@'" {% if form.name.errors|length > 0 %}class="has-error"{% endif %} />
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

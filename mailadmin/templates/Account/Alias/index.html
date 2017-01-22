@@ -1,0 +1,58 @@
+{% extends 'list.html' %}
+
+{% load staticfiles %}
+{% load permissions %}
+
+{% block title %}Aliases: {{account.name}}@{{domain.name}} - {{block.super}}{% endblock %}
+
+{% block actionbar-button %}
+{% has_permission 'privileged' account as is_privileged %}
+{% if is_privileged %}
+{% url 'mailAdmin:accountAliasAdd' domain.name account.name as new_url %}
+{% include 'includes/button_new.html' with text="Add alias" %}
+{% endif %}
+{% endblock %}
+
+{% block content %}
+{% if account.alias_set.all|length > 0 %}
+<ul class="c-list">
+    {% for alias in account.alias_set.all %}
+    <li class="c-list__item js-list-item">
+        <div class="c-list__group c-list__group--title">
+            <div class="c-list__link">
+                <h3 class="c-list__title">
+                    {{alias.name}}@{{alias.account.domain.name}}
+                </h3>
+            </div>
+
+            <button class="c-icon-button c-icon-button--active-rotate  c-list__toggle-button  js-toggle-button">
+                <svg class="c-icon-button__icon">
+                    <use xlink:href="{% static 'mailadmin/img/icons.svg' %}#dropdown"/>
+                </svg>
+                <span class="u-sr-only">Show Actions</span>
+            </button>
+        </div>
+
+        <div class="c-list__group c-list__group--actions js-toggle-panel">
+            <div class="c-list__action-group">
+                <a href="{% url 'mailAdmin:accountAliasRemove' alias.account.domain.name alias.account.name alias.pk %}" class="c-button c-button--icon">
+                    <svg class="c-button__icon">
+                        <use xlink:href="{% static 'mailadmin/img/icons.svg' %}#delete"/>
+                    </svg>
+                    <span class="c-button__text u-sr-only-md">Delete</span>
+                </a>
+            </div>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<ul class="c-list">
+    <li class="c-list__item">
+        <div class="c-list__group c-list__group--title">
+            No aliases found
+        </div>
+    </li>
+</ul>
+{% endif %}
+{% endblock %}

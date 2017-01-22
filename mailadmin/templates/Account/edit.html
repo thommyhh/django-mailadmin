@@ -1,0 +1,80 @@
+{% extends "single.html" %}
+{% load staticfiles %}
+{% load permissions %}
+
+{% block title %}Settings: {{account.name}}@{{account.domain.name}} - {{block.super}}{% endblock %}
+{% block title-text %}Edit account "{{ account.name }}@{{ account.domain.name }}"{% endblock title-text %}
+
+{% block sidebar-button %}
+{% if sidebar_active %}{{ block.super }}{% endif %}
+{% endblock sidebar-button %}
+
+
+{% block form %}
+<form action="{% url 'mailAdmin:accountEdit' account.domain.name account.name %}" method="post">
+    {% csrf_token %}
+    {{ block.super }}
+</form>
+{% endblock %}
+
+{% block content %}
+<div class="l-grid">
+    <div class="l-grid__item l-grid__item--halfs-md">
+        <div class="c-box">
+            <h3 class="c-box__title">Settings</h3>
+            <div class="c-box__content">
+                <label for="password">Password</label>
+                {% if form.password.errors|length > 0 %}
+                <p class="c-label--error">
+                    {% for error in form.password.errors %}
+                    {{ error }}
+                    {% endfor %}
+                </p>
+                {% endif %}
+                <input type="password" id="password" name="password" value="" placeholder="Fill to change" {% if form.password.errors|length > 0 %}class="has-error"{% endif %} />
+
+                {% has_permission 'admin' as is_admin %}
+                {% if is_admin %}
+                <label for="quota">Quota</label>
+                <input type="text" id="quota" name="quota" value="{{ account.quota }}" />
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="l-grid__item l-grid__item--halfs-md">
+        <div class="c-box">
+            <h3 class="c-box__title">Auto reply</h3>
+
+            <div class="c-box__content">
+                <input type="checkbox" name="enableAutoReply" id="enableAutoReply" value="1" {% if account.enableAutoReply %}checked="checked"{% endif %} />
+                <label for="enableAutoReply">Enable auto reply</label>
+
+                <label for="autoReplyText">Text for auto reply</label>
+                <textarea name="autoReplyText" id="autoReplyText">{{ account.autoReplyText }}</textarea>
+            </div>
+        </div>
+    </div>
+
+    {% has_permission 'domain_admin' account.domain as is_domain_admin %}
+    {% has_permission 'privileged' account as is_privileged %}
+    {% if is_domain_admin or is_privileged %}
+    <div class="l-grid__item l-grid__item--halfs-md">
+        <div class="c-box">
+            <h3 class="c-box__title">Mail behavior</h3>
+            <div class="c-box__content">
+                {% if is_domain_admin %}
+                <input type="checkbox" name="catchAll" id="catchAll" value="1" {% if account.catchAll %}checked="checked"{% endif %} />
+                <label for="catchAll">Enable catch-all</label>
+                {% endif %}
+
+                {% if is_privileged %}
+                <label for="redirectTarget">Redirect all mails to</label>
+                <input type="text" id="redirectTarget" name="redirectTarget" value="{{ account.redirectTarget }}" />
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

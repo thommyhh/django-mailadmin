@@ -1,0 +1,39 @@
+{% extends 'single.html' %}
+{% load staticfiles %}
+
+{% block title %}Delete domain "{{domain.name}}"{% endblock %}
+{% block title-text %}Delete "{{domain.name}}"{% endblock %}
+{% block actionbar-button %}{% endblock %}
+
+{% block form %}
+<form action="{% url 'mailAdmin:domainDelete' domain.name %}" method="post">
+    {% csrf_token %}
+    {{ block.super }}
+</form>
+{% endblock %}
+
+{% block content %}
+<div class="l-grid">
+    <div class="l-grid__item l-grid__item--halfs-md">
+        <div class="c-box">
+            <h3 class="c-box__title">Delete {{domain.name}}?</h3>
+            <div class="c-box__content">
+                Do you want to delete the domain {{domain.name}}? The domain has:
+                <ul>
+                    <li>{{domain.account_set.all|length}} accounts</li>
+                    <li>{{domain.aliases|length}} aliases</li>
+                    <li>{{domain.mailinglists.all|length}} mailing lists</li>
+                    <li>{{domain.redirect_set.all|length}} redirects</li>
+                </ul>
+                <div class="c-button-row">
+                    <a href="{% url 'mailAdmin:domainIndex' %}" class="c-button">Cancel</a>
+                    <button type="submit" class="c-button c-button--highlight c-button--icon">
+                        <svg class="c-button__icon"><use xlink:href="{% static 'mailadmin/img/icons.svg' %}#delete"/></svg>
+                        <span class="c-button__text">Delete</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

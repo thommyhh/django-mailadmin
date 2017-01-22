@@ -1,0 +1,98 @@
+{% extends "list.html" %}
+
+{% load staticfiles %}
+{% load permissions %}
+
+{% block title %}Domains - {{ block.super }}{% endblock %}
+
+{% block sidebar %}{% endblock %}
+{% block sidebar-button %}{% endblock %}
+
+{% block actionbar-button %}
+{% has_permission 'admin' as is_admin %}
+{% if is_admin %}
+{% url 'mailAdmin:domainNew' as new_url %}
+{% include 'includes/button_new.html' with text="New domain" %}
+{% endif %}
+{% endblock %}
+
+{% block content %}
+{% if domains %}
+<ul class="c-list">
+    {% for domain in domains %}
+    <li class="c-list__item js-list-item">
+        <div class="c-list__group c-list__group--title">
+            <a href="#" class="c-list__link">
+                <h3 class="c-list__title">{{domain.name}}</h3>
+            </a>
+
+            <button class="c-icon-button c-icon-button--active-rotate  c-list__toggle-button  js-toggle-button">
+                <svg class="c-icon-button__icon">
+                    <use xlink:href="{% static 'mailadmin/img/icons.svg' %}#dropdown"/>
+                </svg>
+                <span class="u-sr-only">Show Actions</span>
+            </button>
+        </div>
+
+        <div class="c-list__group c-list__group--actions  js-toggle-panel">
+            <div class="c-list__action-group">
+                <input type="checkbox" id="active" {% if domain.active %}checked="checked"{% endif %}>
+                <label for="active">Aktiv</label>
+            </div>
+
+            <div class="c-list__action-group">
+                <a href="{% url 'mailAdmin:domainAccounts' domain.name %}" class="c-button c-button--icon">
+                    <svg class="c-button__icon">
+                        <use xlink:href="{% static 'mailadmin/img/icons.svg' %}#account"/>
+                    </svg>
+                    <span class="c-button__text u-sr-only-sm u-sr-only-md">Accounts</span>
+                </a>
+
+                <a href="{% url 'mailAdmin:domainAliases' domain.name %}" class="c-button c-button--icon">
+                    <svg class="c-button__icon">
+                        <use xlink:href="{% static 'mailadmin/img/icons.svg' %}#group"/>
+                    </svg>
+                    <span class="c-button__text u-sr-only-sm u-sr-only-md">Aliases</span>
+                </a>
+
+                <a href="{% url 'mailAdmin:domainLists' domain.name %}" class="c-button c-button--icon">
+                    <svg class="c-button__icon">
+                        <use xlink:href="{% static 'mailadmin/img/icons.svg' %}#device-hub"/>
+                    </svg>
+                    <span class="c-button__text u-sr-only-sm u-sr-only-md">Mailing Lists</span>
+                </a>
+
+                <a href="{% url 'mailAdmin:domainRedirects' domain.name %}" class="c-button c-button--icon">
+                    <svg class="c-button__icon">
+                        <use xlink:href="{% static 'mailadmin/img/icons.svg' %}#forward"/>
+                    </svg>
+                    <span class="c-button__text u-sr-only-sm u-sr-only-md">Forwards</span>
+                </a>
+            </div>
+
+            <div class="c-list__action-group">
+                <a href="{% url 'mailAdmin:domainEdit' domain.name %}" class="c-button c-button--icon">
+                    <svg class="c-button__icon">
+                        <use xlink:href="{% static 'mailadmin/img/icons.svg' %}#settings"/>
+                    </svg>
+                    <span class="c-button__text u-sr-only-sm u-sr-only-md u-sr-only-lg">Settings</span>
+                </a>
+
+                {% has_permission 'admin' as is_admin %}
+                {% if is_admin %}
+                <a href="{% url 'mailAdmin:domainDelete' domain.name %}" class="c-button c-button--icon">
+                    <svg class="c-button__icon">
+                        <use xlink:href="{% static 'mailadmin/img/icons.svg' %}#delete"/>
+                    </svg>
+                    <span class="c-button__text u-sr-only-sm u-sr-only-md u-sr-only-lg">Delete</span>
+                </a>
+                {% endif %}
+            </div>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No domains available</p>
+{% endif %}
+{% endblock %}

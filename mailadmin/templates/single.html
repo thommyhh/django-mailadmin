@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block actionbar %}
+<div class="c-action-bar__group c-action-bar__group--flexible c-action-bar__group--text-overflow">
+    <h2 class="c-action-bar__title">{% block title-text %}{% endblock title-text %}</h2>
+</div>
+{% endblock %}
+
+{% block actionbar-button %}
+<div class="c-action-bar__group">
+    <button class="c-button c-button--icon">
+        <svg class="c-button__icon">
+            <use xlink:href="{% static 'mailadmin/img/icons.svg' %}#save"/>
+        </svg>
+        <span class="c-button__text  u-sr-only-below-md">Save</span>
+    </button>
+</div>
+{% endblock %}

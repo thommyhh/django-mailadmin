@@ -1,0 +1,43 @@
+{% extends 'single.html' %}
+
+{% block title %}Create redirect - {{block.super}}{% endblock %}
+{% block title-text %}Create redirect{% endblock %}
+
+{% block form %}
+<form action="{% url 'mailAdmin:redirectNew' domain.name %}" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="domain" value="{{ domain.pk }}" />
+    {{ block.super }}
+</form>
+{% endblock %}
+
+{% block content %}
+<div class="l-grid">
+    <div class="l-grid__item l-grid__item--halfs-md">
+        <div class="c-box">
+            <h3 class="c-box__title">Settings</h3>
+            <div class="c-box__content">
+                <label for="name">Name (...@{{ domain.name }})</label>
+                {% if form.name.errors|length > 0 %}
+                <p class="c-label--error">
+                    {% for error in form.name.errors %}
+                    {{ error }}
+                    {% endfor %}
+                </p>
+                {% endif %}
+                <input type="text" id="name" name="name" value="{{ form.instance.name }}" placeholder="Name before the '@'" {% if form.name.errors|length > 0 %}class="has-error"{% endif %} />
+
+                <label for="target">Target address</label>
+                {% if form.target.errors|length > 0 %}
+                <p class="c-label--error">
+                    {% for error in form.target.errors %}
+                    {{ error }}
+                    {% endfor %}
+                </p>
+                {% endif %}
+                <input type="text" id="target" name="target" value="{{ form.instance.target }}" placeholder="Target addres, e.g. &quot;someone@gmail.com&quot;" {% if form.target.errors|length > 0 %}class="has-error"{% endif %} />
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

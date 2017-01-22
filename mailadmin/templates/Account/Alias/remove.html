@@ -1,0 +1,33 @@
+{% extends 'single.html' %}
+{% load staticfiles %}
+
+{% block title %}Remove alias {{alias}} from {{account}}{% endblock %}
+{% block title-text %}Remove alias {{alias}}{% endblock %}
+{% block actionbar-button %}{% endblock %}
+
+{% block form %}
+<form action="{% url 'mailAdmin:accountAliasRemove' alias.account.domain.name alias.account.name alias.pk %}" method="post">
+    {% csrf_token %}
+    {{ block.super }}
+</form>
+{% endblock %}
+
+{% block content %}
+<div class="l-grid">
+    <div class="l-grid__item l-grid__item--halfs-md">
+        <div class="c-box">
+            <h3 class="c-box__title">Delete alias {{alias}}?</h3>
+            <div class="c-box__content">
+                <p>Do you want to delete the alias {{alias}} pointing to {{alias.account}}?</p>
+                <div class="c-button-row">
+                    <a href="{% url 'mailAdmin:accountAliases' alias.account.domain.name alias.account.name %}" class="c-button">Cancel</a>
+                    <button type="submit" class="c-button c-button--highlight c-button--icon">
+                        <svg class="c-button__icon"><use xlink:href="{% static 'mailadmin/img/icons.svg' %}#delete"/></svg>
+                        <span class="c-button__text">Delete</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,81 @@
+{% extends 'single.html' %}
+
+{% block title %}Create account - {{block.super}}{% endblock %}
+{% block title-text %}Create account{% endblock %}
+
+{% block form %}
+<form action="{% url 'mailAdmin:accountNew' domain.name %}" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="domain" value="{{ domain.pk }}" />
+    {{ block.super }}
+</form>
+{% endblock %}
+
+{% block content %}
+<div class="l-grid">
+    <div class="l-grid__item l-grid__item--halfs-md">
+        <div class="c-box">
+            <h3 class="c-box__title">Settings</h3>
+            <div class="c-box__content">
+                <label for="name">Name (...@{{ domain.name }})</label>
+                {% if form.name.errors|length > 0 %}
+                <p class="c-label--error">
+                    {% for error in form.name.errors %}
+                    {{ error }}
+                    {% endfor %}
+                </p>
+                {% endif %}
+                <input type="text" id="name" name="name" value="{{ form.instance.name }}" placeholder="Account name before the '@'" {% if form.name.errors|length > 0 %}class="has-error"{% endif %} />
+
+                <label for="password">Password</label>
+                {% if form.password.errors|length > 0 %}
+                <p class="c-label--error">
+                    {% for error in form.password.errors %}
+                    {{ error }}
+                    {% endfor %}
+                </p>
+                {% endif %}
+                <input type="password" id="password" name="password" value="{{ form.instance.password }}" placeholder="" {% if form.password.errors|length > 0 %}class="has-error"{% endif %} />
+
+                <label for="quota">Quota</label>
+                {% if form.quota.errors|length > 0 %}
+                <p class="c-label--error">
+                    {% for error in form.quota.errors %}
+                    {{ error }}
+                    {% endfor %}
+                </p>
+                {% endif %}
+                <input type="text" id="quota" name="quota" value="{{ form.instance.quota }}" {% if form.quota.errors|length > 0 %}class="has-error"{% endif %} />
+            </div>
+        </div>
+    </div>
+
+    <div class="l-grid__item l-grid__item--halfs-md">
+        <div class="c-box">
+            <h3 class="c-box__title">Auto reply</h3>
+
+            <div class="c-box__content">
+                <input type="checkbox" name="enableAutoReply" id="enableAutoReply" value="1" {% if form.instance.enableAutoReply %}checked="checked"{% endif %} />
+                <label for="enableAutoReply">Enable auto reply</label>
+
+                <label for="autoReplyText">Text for auto reply</label>
+                <textarea name="autoReplyText" id="autoReplyText">{{ form.instance.autoReplyText }}</textarea>
+            </div>
+        </div>
+    </div>
+
+    <div class="l-grid__item l-grid__item--halfs-md">
+        <div class="c-box">
+            <h3 class="c-box__title">Mail behavior</h3>
+
+            <div class="c-box__content">
+                <input type="checkbox" name="catchAll" id="catchAll" value="1" {% if form.instance.catchAll %}checked="checked"{% endif %} />
+                <label for="catchAll">Enable catch-all</label>
+
+                <label for="redirectTarget">Redirect all mails to</label>
+                <input type="text" id="redirectTarget" name="redirectTarget" value="{{ form.instance.redirectTarget }}" />
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

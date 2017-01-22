@@ -1,0 +1,84 @@
+{% extends 'list.html' %}
+
+{% load staticfiles %}
+{% load permissions %}
+
+{% block title %}Accounts: {{domain.name}} - {{block.super}}{% endblock %}
+
+{% block actionbar-button %}
+{% has_permission 'domain_admin' as is_domain_admin %}
+{% if is_domain_admin %}
+{% url 'mailAdmin:accountNew' domain.name as new_url %}
+{% include 'includes/button_new.html' with text="New account" %}
+{% endif %}
+{% endblock %}
+
+{% block content %}
+{% if domain.account_set.all|length > 0 %}
+<ul class="c-list">
+    {% for account in domain.account_set.all %}
+    <li class="c-list__item js-list-item">
+        <div class="c-list__group c-list__group--title">
+            <a href="{% url 'mailAdmin:accountEdit' account.domain.name account.name %}" class="c-list__link">
+                <h3 class="c-list__title">
+                    {{account.name}}@{{account.domain.name}}
+                </h3>
+            </a>
+
+            <button class="c-icon-button c-icon-button--active-rotate  c-list__toggle-button  js-toggle-button">
+                <svg class="c-icon-button__icon">
+                    <use xlink:href="{% static 'mailadmin/img/icons.svg' %}#dropdown"/>
+                </svg>
+                <span class="u-sr-only">Show Actions</span>
+            </button>
+        </div>
+
+        <div class="c-list__group c-list__group--actions js-toggle-panel">
+            <div class="c-list__action-group">
+                <input type="checkbox" id="active" {% if account.active %}checked="checked"{% endif %}>
+                <label for="active">Aktiv</label>
+            </div>
+
+            <div class="c-list__action-group">
+                <a href="{% url 'mailAdmin:accountEdit' account.domain.name account.name %}" class="c-button c-button--icon">
+                    <svg class="c-button__icon">
+                        <use xlink:href="{% static 'mailadmin/img/icons.svg' %}#settings"/>
+                    </svg>
+                    <span class="c-button__text u-sr-only-md">Settings</span>
+                </a>
+
+                <a href="{% url 'mailAdmin:accountAliases' account.domain.name account.name %}" class="c-button c-button--icon">
+                    <svg class="c-button__icon">
+                        <use xlink:href="{% static 'mailadmin/img/icons.svg' %}#group"/>
+                    </svg>
+                    <span class="c-button__text u-sr-only-md">Aliases</span>
+                </a>
+
+                <a href="{% url 'mailAdmin:accountMailinglists' account.domain.name account.name %}" class="c-button c-button--icon">
+                    <svg class="c-button__icon">
+                        <use xlink:href="{% static 'mailadmin/img/icons.svg' %}#device-hub"/>
+                    </svg>
+                    <span class="c-button__text u-sr-only-md">Mailing lists</span>
+                </a>
+
+                <a href="{% url 'mailAdmin:accountDelete' account.domain.name account.name %}" class="c-button c-button--icon">
+                    <svg class="c-button__icon">
+                        <use xlink:href="{% static 'mailadmin/img/icons.svg' %}#delete"/>
+                    </svg>
+                    <span class="c-button__text u-sr-only-md">Delete</span>
+                </a>
+            </div>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<ul class="c-list">
+    <li class="c-list__item">
+        <div class="c-list__group c-list__group--title">
+            No accounts found
+        </div>
+    </li>
+</ul>
+{% endif %}
+{% endblock %}

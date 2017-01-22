@@ -1,0 +1,33 @@
+{% extends 'single.html' %}
+
+{% block title %}Add external recipient to {{list.name}}@{{list.domain.name}} - {{block.super}}{% endblock %}
+{% block title-text %}Add external recipient to {{list.name}}@{{list.domain.name}}{% endblock %}
+
+{% block form %}
+<form action="{% url 'mailAdmin:mailinglistExternalAdd' list.domain.name list.name %}" method="post">
+    <input type="hidden" name="{{form.mailing_list.html_name}}" value="{{list.pk}}" />
+    {% csrf_token %}
+    {{ block.super }}
+</form>
+{% endblock %}
+
+{% block content %}
+<div class="l-grid">
+    <div class="l-grid__item l-grid__item--halfs-md">
+        <div class="c-box">
+            <h3 class="c-box__title">Add external recipient</h3>
+            <div class="c-box__content">
+                <label for="{{form.name.id_for_label}}">Email address</label>
+                {% if form.name.errors|length > 0 %}
+                <p class="c-label--error">
+                    {% for error in form.name.errors %}
+                    {{ error }}
+                    {% endfor %}
+                </p>
+                {% endif %}
+                <input type="text" id="{{form.name.id_for_label}}" name="{{form.name.html_name}}" value="{{ form.instance.name }}" {% if form.name.errors|length > 0 %} class="has-error"{% endif %} />
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

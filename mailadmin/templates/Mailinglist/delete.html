@@ -1,0 +1,38 @@
+{% extends 'single.html' %}
+{% load staticfiles %}
+
+{% block title %}Delete mailing list "{{list.name}}@{{list.domain.name}}" - {{block.super}}{% endblock %}
+{% block title-text %}Delete "{{list.name}}@{{list.domain.name}}"{% endblock %}
+{% block actionbar-button %}{% endblock %}
+
+{% block form %}
+<form action="{% url 'mailAdmin:mailinglistDelete' list.domain.name list.name %}" method="post">
+    {% csrf_token %}
+    {{ block.super }}
+</form>
+{% endblock %}
+
+{% block content %}
+<div class="l-grid">
+    <div class="l-grid__item l-grid__item--halfs-md">
+        <div class="c-box">
+            <h3 class="c-box__title">Delete {{list.name}}@{{list.domain.name}}?</h3>
+            <div class="c-box__content">
+                Do you want to delete the mailing list {{list.name}}@{{list.domain.name}}? The list has:
+                <ul>
+                    <li>{{list.accounts.all|length}} accounts associated</li>
+                    <li>{{list.externalreceiver_set.all|length}} external addresses</li>
+                </ul>
+                <p>The associated accounts will <b>not</b> be deleted, but the external addresses will be deleted.</p>
+                <div class="c-button-row">
+                    <a href="{% url 'mailAdmin:domainLists' list.domain.name %}" class="c-button">Cancel</a>
+                    <button type="submit" class="c-button c-button--highlight c-button--icon">
+                        <svg class="c-button__icon"><use xlink:href="{% static 'mailadmin/img/icons.svg' %}#delete"/></svg>
+                        <span class="c-button__text">Delete</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

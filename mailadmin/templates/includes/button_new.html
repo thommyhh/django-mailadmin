@@ -1,0 +1,9 @@
+{% load staticfiles %}
+<div class="c-action-bar__group">
+    <a href="{{ new_url }}" class="c-button c-button--icon">
+        <svg class="c-button__icon">
+            <use xlink:href="{% static 'mailadmin/img/icons.svg' %}#add"/>
+        </svg>
+        <span class="c-button__text  u-sr-only-xs">{{ text }}</span>
+    </a>
+</div>

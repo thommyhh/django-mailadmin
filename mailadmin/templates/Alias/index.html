@@ -1,0 +1,60 @@
+{% extends 'list.html' %}
+
+{% load staticfiles %}
+{% load permissions %}
+
+{% block title %}Aliases: {{domain.name}} - {{block.super}}{% endblock %}
+
+{% block actionbar-button %}
+{% has_permission 'domain_admin' as is_domain_admin %}
+{% if is_domain_admin %}
+{% url 'mailAdmin:aliasNew' domain.name as new_url %}
+{% include 'includes/button_new.html' with text="New alias" %}
+{% endif %}
+{% endblock %}
+
+{% block content %}
+{% if domain.aliases|length > 0 %}
+<ul class="c-list">
+    {% for alias in domain.aliases %}
+    <li class="c-list__item js-list-item">
+        <div class="c-list__group c-list__group--title">
+            <h3 class="c-list__title c-list__title--multiline">
+                <span>{{alias.name}}@{{alias.account.domain.name}}</span>
+                <span>
+                    <svg class="c-list__icon"><use xlink:href="{% static 'mailadmin/img/icons.svg' %}#group"/></svg>
+                    {{alias.account.name}}@{{alias.account.domain.name}}
+                </span>
+            </h3>
+
+            <button class="c-icon-button c-icon-button--active-rotate  c-list__toggle-button  js-toggle-button">
+                <svg class="c-icon-button__icon">
+                    <use xlink:href="{% static 'mailadmin/img/icons.svg' %}#dropdown"/>
+                </svg>
+                <span class="u-sr-only">Show Actions</span>
+            </button>
+        </div>
+
+        <div class="c-list__group c-list__group--actions js-toggle-panel">
+            <div class="c-list__action-group">
+                <a href="{% url 'mailAdmin:aliasDelete' alias.account.domain.name alias.name %}" class="c-button c-button--icon">
+                    <svg class="c-button__icon">
+                        <use xlink:href="{% static 'mailadmin/img/icons.svg' %}#delete"/>
+                    </svg>
+                    <span class="c-button__text u-sr-only-md">Delete</span>
+                </a>
+            </div>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<ul class="c-list">
+    <li class="c-list__item">
+        <div class="c-list__group c-list__group--title">
+            No aliases found
+        </div>
+    </li>
+</ul>
+{% endif %}
+{% endblock %}

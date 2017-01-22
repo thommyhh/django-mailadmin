@@ -1,0 +1,58 @@
+{% extends 'list.html' %}
+
+{% load staticfiles %}
+{% load permissions %}
+
+{% block title %}External receiver: {{list.name}}@{{list.domain.name}} - {{block.super}}{% endblock %}
+
+{% block actionbar-button %}
+{% has_permission 'domain_admin' as is_domain_admin %}
+{% if is_domain_admin %}
+{% url 'mailAdmin:mailinglistExternalAdd' domain.name list.name as new_url %}
+{% include 'includes/button_new.html' with text="Add external receiver" %}
+{% endif %}
+{% endblock %}
+
+{% block content %}
+{% if list.externalreceiver_set.all|length > 0 %}
+<ul class="c-list">
+    {% for external_receiver in list.externalreceiver_set.all %}
+    <li class="c-list__item js-list-item">
+        <div class="c-list__group c-list__group--title">
+            <div class="c-list__link">
+                <h3 class="c-list__title">
+                    {{external_receiver.name}}
+                </h3>
+            </div>
+
+            <button class="c-icon-button c-icon-button--active-rotate  c-list__toggle-button  js-toggle-button">
+                <svg class="c-icon-button__icon">
+                    <use xlink:href="{% static 'mailadmin/img/icons.svg' %}#dropdown"/>
+                </svg>
+                <span class="u-sr-only">Show Actions</span>
+            </button>
+        </div>
+
+        <div class="c-list__group c-list__group--actions js-toggle-panel">
+            <div class="c-list__action-group">
+                <a href="{% url 'mailAdmin:mailinglistExternalRemove' list.domain.name list.name external_receiver.pk %}" class="c-button c-button--icon">
+                    <svg class="c-button__icon">
+                        <use xlink:href="{% static 'mailadmin/img/icons.svg' %}#delete"/>
+                    </svg>
+                    <span class="c-button__text u-sr-only-md">Delete</span>
+                </a>
+            </div>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<ul class="c-list">
+    <li class="c-list__item">
+        <div class="c-list__group c-list__group--title">
+            No external receivers found
+        </div>
+    </li>
+</ul>
+{% endif %}
+{% endblock %}
