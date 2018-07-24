@@ -1,0 +1,8 @@
+{% macro default (headline) %}
+<div class="box">
+  <h3 class="box__title">{{ headline }}</h3>
+  <div class="box__content">
+    {{ caller() }}
+  </div>
+</div>
+{% endmacro %}

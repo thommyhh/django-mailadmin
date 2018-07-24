@@ -1,0 +1,19 @@
+{% set page = {
+  title: "Footer",
+  description: "Different footer types"
+} %}
+
+{% import "./templates.njk" as footer %}
+
+{% extends "../../templates/components.njk" %}
+
+{% block body %}
+
+  {% section title="Default", description="When the user is logged out" %}
+    {{ footer.outer() }}
+  {% endsection %}
+
+  {% section title="Logged in ", description="When a user is logged in" %}
+    {{ footer.dummy() }}
+  {% endsection %}
+{% endblock %}

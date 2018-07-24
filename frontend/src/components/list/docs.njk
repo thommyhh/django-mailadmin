@@ -1,0 +1,40 @@
+{% set page = {
+  title: "List",
+  description: "Different types of lists"
+} %}
+
+{% import "./templates.njk" as list %}
+
+{% extends "../../templates/components.njk" %}
+
+{% block body %}
+
+  {% section title="Domains", description="An example of domain lists" %}
+    {% call list.outer() %}
+      {{ list.domain("awesome-domain.de") }}
+      {{ list.domain("awesome-pictures-unbelievable-long-domain.com", active = false) }}
+      {{ list.domain("better-website.com") }}
+      {{ list.domain("my-neighbour.blog") }}
+      {{ list.domain("zebra-are-cool.zoo") }}
+    {% endcall %}
+  {% endsection %}
+
+  {% section title="Alias", description="An example of alias list" %}
+    {% call list.outer() %}
+      {{ list.alias("first@better-webite.com", "first.last@better-website.com") }}
+      {{ list.alias("info@better-webite.com", "master@better-website.com") }}
+      {{ list.alias("last@better-webite.com", "first.last@better-website.com") }}
+      {{ list.alias("post@better-webite.com", "buttler@better-website.com", active = false) }}
+      {{ list.alias("zebra@better-webite.com", "master@better-website.com") }}
+    {% endcall %}
+  {% endsection %}
+
+  {% section title="Forwards", description="An example of forward list" %}
+    {% call list.outer() %}
+      {{ list.forward("buttler@better-webite.com", "somewhere@else.com", active = false) }}
+      {{ list.forward("first.last@better-webite.com", "tom.better@gmail.com") }}
+      {{ list.forward("master@better-webite.com", "malcom.better@better-mail.com") }}
+    {% endcall %}
+  {% endsection %}
+
+{% endblock %}

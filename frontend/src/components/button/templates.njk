@@ -1,0 +1,29 @@
+{% macro link(text, modifier = null, icon = null, iconOnly = false) %}
+  <a href="javascript:void();" class="{{ class(modifier, icon) }}">
+    {% if icon -%}
+      <svg class="button__icon">
+        <use xlink:href="{{ 'assets/icons.svg' | relative }}#{{ icon }}-icon"/>
+      </svg>
+    {%- endif %}
+    <span class="button__text{% if iconOnly %} sr-only{% endif %}">{{ text }}</span>
+  </a>
+{% endmacro %}
+
+{% macro button(text, modifier = null, icon = null, iconOnly = false) %}
+  <button class="{{ class(modifier, icon) }}">
+    {% if icon -%}
+      <svg class="button__icon">
+        <use xlink:href="{{ 'assets/icons.svg' | relative }}#{{ icon }}-icon"/>
+      </svg>
+    {%- endif %}
+    <span class="button__text{% if iconOnly %} sr-only{% endif %}">{{ text }}</span>
+  </button>
+{% endmacro %}
+
+{% macro input(text, modifier = null, type = null) %}
+  <input type="{{ type or 'submit' }}" class="{{ class(modifier) }}" value="{{ text }}">
+{% endmacro %}
+
+{% macro class(modifier, icon = null) -%}
+  button{% if modifier %} button--{{ modifier }}{% endif %}{% if icon %} button--icon{% endif %}
+{%- endmacro %}

@@ -1,0 +1,15 @@
+{% set page = {
+  title: "Header",
+  description: "Header"
+} %}
+
+{% import "./templates.njk" as header %}
+
+{% extends "../../templates/components.njk" %}
+
+{% block body %}
+
+  {% section title="Default" %}
+    {{ header.default() }}
+  {% endsection %}
+{% endblock %}

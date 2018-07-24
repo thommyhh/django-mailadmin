@@ -1,0 +1,68 @@
+// VARIABLES
+// =============================================================================
+
+// COLORS
+// =====================================
+
+// Choose awesome cool color names
+// that hint at the actual color
+
+$color-orange: #fc3c00;
+$color-green: #2ba90c;
+$color-white: #fff;
+$color-mist: #ddd;
+$color-silver: #aaa;
+$color-shadow: #555;
+$color-charcoal: #222;
+
+// TYPOGRAPHY
+// =====================================
+
+// Font sizes are applied to the root element (HTML)
+// They define all other sizes through rem/em
+
+$font-size-xs: 100%; // 16px
+$font-size-sm: 100%; // 16px
+$font-size-md: 112.5%; // 18px
+
+$font-stack: Roboto, Arial, sans-serif;
+
+// BREAKPOINTS
+// =====================================
+
+// Media Queries always use the initial browser font-size for
+// relative (rem/em) declarations (otherwise loops would be possible)
+
+// The pixel values in the comments are based on the assumption that the
+// majority of browsers use 16px as the default font-size
+
+$break-sm: 30em; // 480px
+$break-md: 50em; // 800px
+$break-lg: 80em; // 1280px
+$break-xl: 100em; // 1600px
+$break-xxl: 118em; // 1888px
+
+// Create min/max breakpoint variables
+// For max breakpoints we calculate em equivalent for 1px
+// (1px / 16px) = 0.0625em
+
+$break-xs-max: ($break-sm  - (1px / 16px)); // 480px  - 1px = 479px
+$break-sm-min: $break-sm; // 480px
+$break-sm-max: ($break-md  - (1px / 16px)); // 800px  - 1px = 799px
+$break-md-min: $break-md; // 800px
+$break-md-max: ($break-lg  - (1px / 16px)); // 1280px - 1px = 1279px
+$break-lg-min: $break-lg; // 1280px
+$break-lg-max: ($break-xl  - (1px / 16px)); // 1600px - 1px = 1599px
+$break-xl-min: $break-xl; // 1600px
+$break-xl-max: ($break-xxl - (1px / 16px)); // 1887px;
+$break-xxl-min: $break-xxl; // 1888px;
+
+// Z-INDEXES
+// =====================================
+
+$z-index-nav-cover: 700;
+$z-index-nav-sidebar: 800;
+$z-index-dropdown: 900;
+$z-index-header: 1000;
+$z-index-footer: 1000;
+$z-index-notification: 2000;

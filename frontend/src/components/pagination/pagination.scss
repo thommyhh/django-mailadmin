@@ -1,0 +1,90 @@
+/* PAGINATION
+ * If you gained so much fame, you need multiple pages for all your domains.
+============================================================================= */
+
+
+
+.pagination {
+  display: flex;
+  flex-direction: column;
+  margin: 2rem 0.6rem;
+
+  @media (min-width: $break-sm-min) {
+    margin: 2rem 1rem;
+  }
+
+  @media (min-width: $break-md-min) {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+
+
+// PAGINATION GROUP
+// =====================================
+
+.pagination__group {
+  display: flex;
+  align-items: flex-start;
+
+  @media (min-width: $break-md-min) {
+    align-items: center;
+  }
+}
+
+.pagination__group--pages {
+  flex-wrap: wrap;
+}
+
+.pagination__group--settings {
+  --form-label-color: #{$color-shadow};
+  --form-control-color: #{$color-white};
+  --form-control-bg-color: #{$color-shadow};
+  --form-control-box-shadow-color: rgba(255, 255, 255, 0.85);
+
+  flex-direction: column;
+
+  @media (min-width: $break-md-min) {
+    flex-direction: row;
+  }
+
+  .form__control--select {
+    background-image: svg-url('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#{$color-white}"><path d="M7 10l5 5 5-5z"/></svg>');
+  }
+}
+
+
+
+// PAGINATION PAGE
+// =====================================
+
+.pagination__page {
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+
+
+// PAGINATION ITEMS per PAGE
+// =====================================
+
+.pagination__label {
+  margin: 0.5rem 0;
+  white-space: nowrap;
+
+  @media (min-width: $break-md-min) {
+    margin: 0 1rem 0.5rem;
+  }
+}
+
+.pagination__items-per-page {
+  width: auto;
+  margin: 0 0 0.5rem;
+
+  &:hover,
+  &:focus {
+    background-color: darken($color-shadow, 15%);
+  }
+}

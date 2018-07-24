@@ -1,0 +1,144 @@
+.dropdown {
+  display: inline-block;
+
+  @media (min-width: $break-sm-min) {
+    position: relative;
+  }
+
+  &__button {
+    position: relative;
+    padding-right: 2.2em;
+
+    &.is-active {
+      background-color: darken($color-shadow, 15%);
+
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+
+      &:hover,
+      &:focus {
+        background-color: darken($color-shadow, 25%);
+      }
+    }
+  }
+
+  &__icon {
+    position: absolute;
+    height: 1.8em;
+    width: 1.8em;
+    top: 50%;
+    right: 0.4em;
+    transform: translateY(-50%);
+
+    fill: currentColor;
+
+    .dropdown__button.is-active & {
+      transform: translateY(-50%) rotate(180deg);
+    }
+
+    @media (min-width: $break-md-min) {
+      height: 1.6em;
+      width: 1.6em;
+    }
+  }
+
+  &__input {
+    margin: 0;
+    padding: 0 2em 0 1em;
+
+    background-image: svg-url('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#{$color-white}"><path d="M7 10l5 5 5-5z"/></svg>');
+    background-position: right 0.4em center;
+    background-size: 1.8em;
+    background-repeat: no-repeat;
+
+    &.is-active {
+      background-image: svg-url('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#{$color-white}"><path d="M7 10l5 5 5-5z" transform="rotate(180 12 12)"/></svg>');
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    @media (min-width: $break-md-min) {
+      background-size: 1.6em;
+    }
+  }
+
+  &__panel {
+    display: none;
+    position: absolute;
+    left: 0.5em;
+    right: 0.5em;
+
+    background-color: $color-shadow;
+    border-radius: 0 0 0.2em 0.2em;
+
+    z-index: $z-index-dropdown;
+
+    &.is-visible {
+      display: block;
+    }
+
+    @media (min-width: $break-sm-min) {
+      left: auto;
+      right: auto;
+    }
+
+    &--menu {
+      @media (min-width: $break-sm-min) {
+        white-space: nowrap;
+      }
+    }
+
+    &--full {
+      @media (min-width: $break-sm-min) {
+        left: 0;
+        right: 0;
+      }
+    }
+
+    &--to-left {
+      @media (min-width: $break-sm-min) {
+        right: 0;
+      }
+    }
+  }
+
+  &__list {
+    margin: 0;
+    padding: 0;
+  }
+
+  &__item {
+    display: block;
+    position: relative;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 1em;
+      right: 1em;
+      height: 1px;
+
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+  }
+
+  &__link {
+    display: block;
+    padding: 1em;
+
+    text-decoration: none;
+    color: $color-white;
+
+    outline: none;
+
+    &:hover,
+    &:focus {
+      background-color: rgba(255, 255, 255, 0.08);
+    }
+  }
+
+  .form__control {
+    margin-bottom: 0;
+  }
+}

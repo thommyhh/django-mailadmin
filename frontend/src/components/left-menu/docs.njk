@@ -1,0 +1,14 @@
+{% set page = {
+  title: "Left menu"
+} %}
+
+{% import "./templates.njk" as menu %}
+
+{% extends "../../templates/components.njk" %}
+
+{% block body %}
+
+  {% section title="Default" %}
+    {{ menu.dummy() }}
+  {% endsection %}
+{% endblock %}

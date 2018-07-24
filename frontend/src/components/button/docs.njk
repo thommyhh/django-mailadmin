@@ -1,0 +1,44 @@
+{% set page = {
+  title: "Button",
+  description: "Different types of buttons"
+} %}
+
+{% import "./templates.njk" as button %}
+
+{% extends "../../templates/components.njk" %}
+
+{% block body %}
+
+  {% section title="Default", description="A standard button" %}
+    {{ button.link("Button text") }}
+    {{ button.button("Button text") }}
+    {{ button.input("Button text") }}
+  {% endsection %}
+
+  {% section title="With icon", description="Button with text and icon" %}
+    {{ button.link("Button text", null, 'group') }}
+    {{ button.button("Button text", null, 'group') }}
+  {% endsection %}
+
+  {% section title="Icon only", description="Button with only an icon" %}
+    {{ button.link(null, icon = 'group', iconOnly = true) }}
+    {{ button.button(null, icon = 'group', iconOnly = true) }}
+  {% endsection %}
+
+  {% section title="Highlight", description="A highlighted button" %}
+    {{ button.link('My button', 'highlight') }}
+    {{ button.button('My button', 'highlight') }}
+    {{ button.input('My button', 'highlight') }}
+  {% endsection %}
+
+  {% section title="Highlight with icon", description="Button with text and icon" %}
+    {{ button.link("Button text", 'highlight', 'group') }}
+    {{ button.button("Button text", 'highlight', 'group') }}
+  {% endsection %}
+
+  {% section title="Highlight with icon only", description="Button with icon only" %}
+    {{ button.link("Button text", 'highlight', 'group', true) }}
+    {{ button.button("Button text", 'highlight', 'group', true) }}
+  {% endsection %}
+
+{% endblock %}

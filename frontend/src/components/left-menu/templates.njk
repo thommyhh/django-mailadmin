@@ -1,0 +1,32 @@
+{% macro item(label, active = false, icon = none) %}
+  <li class="nav-sidebar__item">
+    <a href="javascript:void(0);" class="nav-sidebar__link{% if active %} nav-sidebar__link--highlight{% endif %}{% if icon %} nav-sidebar__link--muted{% endif %}">
+      {% if icon %}
+      <svg class="nav-sidebar__icon">
+        <use xlink:href="{{ 'assets/icons.svg'|relative }}#{{ icon }}-icon"/>
+      </svg>
+      {% endif %}
+      {{ label }}
+    </a>
+  </li>
+{% endmacro %}
+
+{% macro outer() %}
+  <nav class="nav-sidebar">
+    <ul class="nav-sidebar__list">
+      {{ caller() }}
+    </ul>
+  </nav>
+
+{% endmacro %}
+
+{% macro dummy() %}
+  {% call outer() %}
+    {{ item("Domain list", icon = "arrow-back") }}
+    {{ item("Settings") }}
+    {{ item("Accounts") }}
+    {{ item("Aliases", active = true) }}
+    {{ item("Mailing lists") }}
+    {{ item("Forwards") }}
+  {% endcall %}
+{% endmacro %}

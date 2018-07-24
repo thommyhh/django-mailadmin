@@ -1,0 +1,62 @@
+{% macro input(id, type, label, message = none, disabled = false, class = none) %}
+  {{ error(message) }}
+  <label for="{{ id }}" class="form__label sr-only">{{ label }}</label>
+  <input class="form__control form__control--input{% if class %} {{ class }}{% endif %}{% if message %} has-error{% endif %}" type="{{ type }}" id="{{ id }}" placeholder="{{ label }}"{% if disabled %} disabled="disabled"{% endif %}>
+{% endmacro %}
+
+{% macro textarea(id, label, message = none, disabled = false) %}
+  {{ error(message) }}
+  <label for="{{ id }}" class="form__label sr-only">{{ label }}</label>
+  <textarea class="form__control form__control--textarea{% if message %} has-error{% endif %}" id="{{ id }}" placeholder="{{ label }}" rows="5"{% if disabled %} disabled="disabled"{% endif %}></textarea>
+{% endmacro %}
+
+{% macro select(id, label, options, message = none, disabled = false) %}
+  {{ error(message) }}
+  <label for="{{ id }}" class="form__label sr-only">{{ label }}</label>
+  <select id="{{ id }}" class="form__control form__control--select{% if message %} has-error{% endif %}"{% if disabled %} disabled="disabled"{% endif %}>
+    <option value="">{{ label }}</option>
+    {% for option in options %}
+      <option value="value{{ loop.index }}">{{ option }}</option>
+    {% endfor %}
+  </select>
+{% endmacro %}
+
+{% macro radio(id, label, options, message = none) %}
+  {{ error(message) }}
+  <div class="form__control form__control--radio{% if message %} has-error{% endif %}">
+    <label class="form__label">{{ label }}</label>
+    {% for option in options %}
+    <div class="form__radio-item">
+      <input class="form__radio-input" type="radio" name="{{ id }}" value="value{{ loop.index }}" id="{{ id }}{{ loop.index }}" />
+      <label class="form__radio-label" for="{{ id }}{{ loop.index }}">{{ option }}</label>
+    </div>
+    {% endfor %}
+  </div>
+{% endmacro %}
+
+{% macro checkbox(id, label, options, message = none) %}
+  {{ error(message) }}
+  <div class="form__control form__control--checkbox{% if message %} has-error{% endif %}">
+    <label class="form__label">{{ label }}</label>
+    {% for option in options %}
+    <div class="form__checkbox-item">
+      <input class="form__checkbox-input" type="checkbox" name="{{ id }}" value="value{{ loop.index }}" id="{{ id }}{{ loop.index }}" />
+      <label class="form__checkbox-label" for="{{ id }}{{ loop.index }}">{{ option }}</label>
+    </div>
+    {% endfor %}
+  </div>
+{% endmacro %}
+
+{% macro error(message) %}
+  {% if message %}
+    <p class="form__error">
+      {{ message }}
+    </p>
+  {% endif %}
+{% endmacro %}
+
+{% macro form(dark = false) %}
+  <form class="form{% if dark %} form--dark{% endif %}">
+    {{ caller() }}
+  </form>
+{% endmacro %}

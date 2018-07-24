@@ -1,0 +1,26 @@
+{% macro default(headline, text, type, icon) %}
+  <div class="notification notification--{{ type }}">
+    <div class="notification__group">
+      <svg class="notification__icon"><use xlink:href="{{ 'assets/icons.svg'|relative }}#{{ icon }}-icon"/></svg>
+    </div>
+
+    <div class="notification__group notification__group--flexible">
+      <p class="notification__headline">{{ headline }}</p>
+      <p class="notification__text">{{ message }}</p>
+    </div>
+
+    <div class="notification__group">
+      <button class="icon-button icon-button--light">
+        <svg class="icon-button__icon"><use xlink:href="{{ 'assets/icons.svg'|relative }}#close-icon"/></svg>
+      </button>
+    </div>
+  </div>
+{% endmacro %}
+
+{% macro success(headline, text) %}
+  {{ default(headline, text, "success", "check") }}
+{% endmacro %}
+
+{% macro error(headline, text) %}
+  {{ default(headline, text, "error", "error") }}
+{% endmacro %}

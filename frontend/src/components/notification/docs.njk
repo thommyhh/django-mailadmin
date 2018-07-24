@@ -1,0 +1,19 @@
+{% set page = {
+  title: "Notification",
+  description: "Different types of notifications"
+} %}
+
+{% import "./templates.njk" as notification %}
+
+{% extends "../../templates/components.njk" %}
+
+{% block body %}
+
+  {% section title="Success" %}
+    {{ notification.success("Settings saved", "New settings for domain awesome-pictures.net successfully saved.") }}
+  {% endsection %}
+
+  {% section title="Error" %}
+    {{ notification.error("An error occurred", "The settings could not be saved.") }}
+  {% endsection %}
+{% endblock %}

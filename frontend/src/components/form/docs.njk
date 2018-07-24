@@ -1,0 +1,52 @@
+{% set page = {
+  title: "Form",
+  description: "Form components"
+} %}
+
+{% import "./templates.njk" as form %}
+
+{% extends "../../templates/components.njk" %}
+
+{% block body %}
+
+  {% section title="Default", description="Different types of form elements", background="#ddd" %}
+    {% call form.form() %}
+      {{ form.input("text1", "text", "Textfield") }}
+      {{ form.input("text2", "text", "Textfield", "Please check this field") }}
+      {{ form.input("text3", "text", "Textfield", disabled = true) }}
+      {{ form.input("password1", "password", "Password") }}
+      {{ form.input("email1", "email", "Email address") }}
+      {{ form.input("search1", "search", "Search ...", class = "form__control--search") }}
+      {{ form.textarea("textarea1", "Some textarea") }}
+      {{ form.textarea("textarea2", "Some textarea", message = "Check this field") }}
+      {{ form.textarea("textarea3", "Some textarea", disabled = true) }}
+      {{ form.select("select1", "Select an option", ["Option 1", "Option 2", "Option 3", "Option 4"]) }}
+      {{ form.select("select2", "Some textarea", ["Option 1", "Option 2", "Option 3", "Option 4"], message = "Check this field") }}
+      {{ form.select("select3", "Some textarea", ["Option 1", "Option 2", "Option 3", "Option 4"], disabled = true) }}
+      {{ form.radio("radio1", "Make a choice", ["Choice 1", "Choice 2", "Choice 3"]) }}
+      {{ form.radio("radio2", "Make a choice", ["Choice 1", "Choice 2", "Choice 3"], message = "Please choose one") }}
+      {{ form.checkbox("checkbox1", "Features", ["Choice 1", "Choice 2", "Choice 3"]) }}
+      {{ form.checkbox("checkbox2", "Features", ["Choice 1", "Choice 2", "Choice 3"], message = "Please choose at least one") }}
+    {% endcall %}
+  {% endsection %}
+
+  {% section title="Dark", description="Form elements on dark background", background = "#222" %}
+    {% call form.form(dark = true) %}
+      {{ form.input("text4", "text", "Textfield") }}
+      {{ form.input("text5", "text", "Textfield", "Please check this field") }}
+      {{ form.input("text6", "text", "Textfield", disabled = true) }}
+      {{ form.input("password2", "password", "Password") }}
+      {{ form.input("email2", "email", "Email address") }}
+      {{ form.textarea("textarea4", "Some textarea") }}
+      {{ form.textarea("textarea5", "Some textarea", message = "Check this field") }}
+      {{ form.textarea("textarea6", "Some textarea", disabled = true) }}
+      {{ form.select("select4", "Select an option", ["Option 1", "Option 2", "Option 3", "Option 4"]) }}
+      {{ form.select("select5", "Some textarea", ["Option 1", "Option 2", "Option 3", "Option 4"], message = "Check this field") }}
+      {{ form.select("select6", "Some textarea", ["Option 1", "Option 2", "Option 3", "Option 4"], disabled = true) }}
+      {{ form.radio("radio3", "Make a choice", ["Choice 1", "Choice 2", "Choice 3"]) }}
+      {{ form.radio("radio4", "Make a choice", ["Choice 1", "Choice 2", "Choice 3"], message = "Please choose one") }}
+      {{ form.checkbox("checkbox3", "Features", ["Choice 1", "Choice 2", "Choice 3"]) }}
+      {{ form.checkbox("checkbox4", "Features", ["Choice 1", "Choice 2", "Choice 3"], message = "Please choose at least one") }}
+    {% endcall %}
+  {% endsection %}
+{% endblock %}

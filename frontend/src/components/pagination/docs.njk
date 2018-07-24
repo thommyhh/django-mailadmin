@@ -1,0 +1,15 @@
+{% set page = {
+  title: "Pagination",
+  description: "Pagination example"
+} %}
+
+{% import "./templates.njk" as pagination %}
+
+{% extends "../../templates/components.njk" %}
+
+{% block body %}
+
+  {% section title="Default" %}
+    {{ pagination.default() }}
+  {% endsection %}
+{% endblock %}

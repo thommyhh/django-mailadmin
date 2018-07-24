@@ -1,0 +1,14 @@
+{% set page = {
+  title: "Title"
+} %}
+
+{% import "./templates.njk" as title %}
+
+{% extends "../../templates/components.njk" %}
+
+{% block body %}
+
+  {% section title="Default" %}
+    {{ title.default("info@awesome-pictures.com", "Save") }}
+  {% endsection %}
+{% endblock %}

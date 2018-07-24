@@ -1,0 +1,14 @@
+{% set page = {
+  title: "Filter"
+} %}
+
+{% import "./templates.njk" as filter %}
+
+{% extends "../../templates/components.njk" %}
+
+{% block body %}
+
+  {% section title="Default" %}
+    {{ filter.default("New Domain") }}
+  {% endsection %}
+{% endblock %}

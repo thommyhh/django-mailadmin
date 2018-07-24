@@ -1,0 +1,19 @@
+{% set page = {
+  title: "Logo",
+  description: "Variants of the logo"
+} %}
+
+{% import "./templates.njk" as logo %}
+
+{% extends "../../templates/components.njk" %}
+
+{% block body %}
+
+  {% section title="Default", description="The logo on brigt background" %}
+    {{ logo.default(dark = true) }}
+  {% endsection %}
+
+  {% section title="Dark", description="The logo on dark background", background="#222" %}
+    {{ logo.default() }}
+  {% endsection %}
+{% endblock %}

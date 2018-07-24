@@ -1,0 +1,14 @@
+{
+  "root": true,
+  "plugins": ["ava"],
+  "extends": [
+    "standard",
+    "plugin:ava/recommended",
+    "plugin:testcafe/recommended"
+  ],
+  "rules": {
+    "no-warning-comments": "warn",
+    "quotes": ["error", "single"],
+    "space-before-function-paren": "off"
+  }
+}

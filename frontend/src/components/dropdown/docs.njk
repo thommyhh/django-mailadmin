@@ -1,0 +1,51 @@
+{% set page = {
+  title: "Dropdown",
+  description: "Different types of dropdowns"
+} %}
+
+{% import "./templates.njk" as dropdown %}
+
+{% extends "../../templates/components.njk" %}
+
+{% block body %}
+
+  {% section title="Default", description="Default dropdown with text only" %}
+    {% call dropdown.list("Dropdown 1") %}
+      {{ dropdown.item("Dropdown item #1") }}
+      {{ dropdown.item("Dropdown item #2") }}
+      {{ dropdown.item("Dropdown item #3") }}
+      {{ dropdown.item("Dropdown item #4") }}
+      {{ dropdown.item("Dropdown item #5") }}
+    {% endcall %}
+  {% endsection %}
+
+  {% section title="Icon only", description="Dropdown with icon only" %}
+    {% call dropdown.list("Dropdown 1", "account", true) %}
+      {{ dropdown.item("Dropdown item #1") }}
+      {{ dropdown.item("Dropdown item #2") }}
+      {{ dropdown.item("Dropdown item #3") }}
+      {{ dropdown.item("Dropdown item #4") }}
+      {{ dropdown.item("Dropdown item #5") }}
+    {% endcall %}
+  {% endsection %}
+
+  {% section title="Text and icon", description="Dropdown with text and icon" %}
+    {% call dropdown.list("Dropdown 1", "account") %}
+      {{ dropdown.item("Dropdown item #1") }}
+      {{ dropdown.item("Dropdown item #2") }}
+      {{ dropdown.item("Dropdown item #3") }}
+      {{ dropdown.item("Dropdown item #4") }}
+      {{ dropdown.item("Dropdown item #5") }}
+    {% endcall %}
+  {% endsection %}
+
+  {% section title="Autocomplete", description="Dropdown with autocomplete" %}
+    {% call dropdown.list("Dropdown 1", url = '/dummy/data/auto-complete') %}
+      {{ dropdown.item("Dropdown item #1") }}
+      {{ dropdown.item("Dropdown item #2") }}
+      {{ dropdown.item("Dropdown item #3") }}
+      {{ dropdown.item("Dropdown item #4") }}
+      {{ dropdown.item("Dropdown item #5") }}
+    {% endcall %}
+  {% endsection %}
+{% endblock %}

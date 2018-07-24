@@ -1,0 +1,117 @@
+/* NOTIFICATION
+ * Fire alarm, severe weather and flood warning.
+============================================================================= */
+
+
+
+// NOTIFICATION CONTAINER
+// Displays notification full width at
+// the top of the parent element
+// (usually the viewport or header)
+// =====================================
+
+.notification-container {
+  width: 100%;
+  z-index: $z-index-notification;
+
+  @media (max-width: $break-md-max) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: 0;
+  }
+}
+
+
+
+// NOTIFICATION
+// =====================================
+
+.notification {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 0.6rem;
+
+  color: $color-white;
+
+  background-color: $color-shadow;
+
+  @media (min-width: $break-sm-min) {
+    min-height: 4em;
+    padding: 0.6rem 1rem;
+  }
+}
+
+
+
+// NOTIFICATION STATES
+// =====================================
+
+.notification--success {
+  background-color: $color-green;
+}
+
+.notification--error {
+  background-color: $color-orange;
+}
+
+
+
+// NOTIFICATION ICON
+// =====================================
+
+.notification__icon {
+  flex-shrink: 0;
+  width: 2em;
+  height: 2em;
+
+  fill: currentColor;
+}
+
+
+
+// NOTIFICATION CONTENT GROUPING
+// =====================================
+
+.notification__group {
+  flex-shrink: 0;
+  margin-right: 0.6rem;
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  @media (min-width: $break-sm-min) {
+    margin-right: 1rem;
+  }
+}
+
+.notification__group--flexible {
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+
+
+
+// NOTIFICATION CONTENT
+// =====================================
+
+.notification__headline {
+  margin: 0 0 0.1em;
+
+  font-size: 1.3em;
+  font-weight: 300;
+}
+
+.notification__text {
+  margin: 0;
+
+  font-size: 1em;
+  font-weight: 300;
+
+  @media (min-width: $break-md-min) {
+    font-size: 0.9em;
+  }
+}

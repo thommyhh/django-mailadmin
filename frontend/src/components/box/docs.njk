@@ -1,0 +1,34 @@
+{% set page = {
+  title: "Box",
+  description: "A versatile box"
+} %}
+
+{% import "./templates.njk" as box %}
+
+{% extends "../../templates/components.njk" %}
+
+{% block body %}
+
+  {% section title="Text", description="A box with a little bit of text" %}
+    {% call box.default("A text headline") %}
+      <p>A few paragraphs of random text that escaped the front-end dev's keyboard. Neither meaning nor sense will be discoverable. But real words and sentences are so much better than stupid lorem ipsum text.</p>
+      <p>The following paragraph is an excerpt from the Wikipedia article about the Wikipdia:</p>
+      <p>Wikipedia (/ˌwɪkᵻˈpiːdiə/ or /ˌwɪkiˈpiːdiə/ wik-i-pee-dee-ə) is an Internet encyclopedia, supported and hosted by the non-profit Wikimedia Foundation. It is a free-of-cost encyclopedia with its articles being free-content; those who use Wikipedia can edit almost any article accessible.</p>
+    {% endcall %}
+  {% endsection %}
+
+  {% section title="Form", description="A box with the login form" %}
+    {% call box.default("Login") %}
+      <form>
+        <label for="user" class="sr-only">Username</label>
+        <input type="text" id="user" placeholder="Username">
+
+        <label for="password" class="sr-only">Password</label>
+        <input type="password" id="password" placeholder="Password">
+
+        <input type="submit" value="Submit" class="button button--highlight">
+        <a href="#" class="button-additional-link">Forgot password?</a>
+      </form>
+    {% endcall %}
+  {% endsection %}
+{% endblock %}

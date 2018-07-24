@@ -1,0 +1,223 @@
+/* LIST
+ * They list domains, accounts, forwards and aliases
+============================================================================= */
+
+// LIST CONTAINER
+// =====================================
+
+.list {
+  margin: 0;
+  padding: 0;
+}
+
+// LIST ITEM
+// =====================================
+
+.list__item {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding: 0.6rem;
+
+  &::after {
+    content: "";
+    position: absolute;
+    height: 1px;
+    bottom: 0;
+    left: 0.6rem;
+    right: 0.6rem;
+
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+
+  @media (min-width: $break-sm-min) {
+    padding: 1rem;
+
+    &::after {
+      left: 1rem;
+      right: 1rem;
+    }
+  }
+
+  @media (min-width: $break-md-min) {
+    flex-direction: row;
+    justify-content: space-between;
+    height: 4em;
+    padding: 0 1rem;
+  }
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.08);
+  }
+}
+
+// GROUP for ELEMENTS within LIST ITEM
+// =====================================
+
+.list__group {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+
+  @media (min-width: $break-md-min) {
+    // Media Query is necessary to fix Safari flexbox bug
+    // where height: 100% isn't working if parent has no
+    // explicit height
+    height: 100%;
+  }
+}
+
+.list__group--title {
+  flex-grow: 1;
+}
+
+.list__group--actions {
+  flex-shrink: 0;
+  flex-direction: column;
+  align-items: stretch;
+  margin-top: 0.6em;
+
+  @media (max-width: $break-sm-max) {
+    display: none;
+  }
+
+  @media (min-width: $break-sm-min) {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  @media (min-width: $break-md-min) {
+    margin-top: 0;
+  }
+
+  &.is-visible {
+    display: flex;
+  }
+}
+
+.list__action-group {
+  display: flex;
+  flex-direction: column;
+
+  @media (min-width: $break-sm-min) {
+    flex-direction: row;
+    margin-left: 1em;
+  }
+
+  @media (min-width: $break-sm-min) and (max-width: $break-sm-max) {
+    margin-left: 1em;
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+}
+
+// ELEMENTS within LIST ITEM
+// =====================================
+
+// Link
+
+.list__link {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+
+  text-decoration: none;
+  color: $color-shadow;
+
+  outline: none;
+
+  &:focus {
+    color: $color-charcoal;
+    background-color: darken($color-white, 15%);
+  }
+
+  .list__item:hover & {
+    color: $color-charcoal;
+  }
+
+  .list__item.is-inactive & {
+    color: $color-silver;
+  }
+
+  .list__item.is-inactive:hover &,
+  .list__item.is-inactive &:focus {
+    color: $color-shadow;
+  }
+}
+
+// Title
+
+.list__title {
+  margin: 0;
+  overflow: hidden;
+
+  font-size: 1.3em;
+  font-weight: 300;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.list__title--multiline {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  font-size: 1.1em;
+
+  > * {
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  @media (min-width: $break-lg-min) {
+    flex-direction: row;
+    height: auto;
+
+    font-size: 1.3em;
+  }
+}
+
+.list__icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: middle;
+
+  fill: currentColor;
+
+  @media (min-width: $break-lg-min) {
+    margin-left: 0.4em;
+  }
+}
+
+// Toggle Button
+
+.list__toggle-button {
+  @media (min-width: $break-md-min) {
+    display: none;
+  }
+}
+
+// Checkbox
+
+.list__item .form__checkbox-label {
+  margin-bottom: 0;
+  text-transform: uppercase;
+}
+
+// Button
+
+.list__item .button {
+  flex-shrink: 0;
+  margin-top: 0.6em;
+
+  @media (min-width: $break-sm-min) {
+    margin-top: 0;
+    margin-left: 0.6em;
+  }
+}

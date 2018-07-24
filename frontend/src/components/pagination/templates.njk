@@ -1,0 +1,26 @@
+{% macro default() %}
+  <nav class="pagination">
+    <div class="pagination__group pagination__group--pages">
+      <button class="button button--highlight  pagination__page">1</button>
+      <button class="button  pagination__page">2</button>
+      <button class="button  pagination__page">3</button>
+      <button class="button  pagination__page">4</button>
+      <button class="button  pagination__page">5</button>
+      <button class="button  pagination__page">6</button>
+      <button class="button  pagination__page">7</button>
+    </div>
+
+    <div class="pagination__group pagination__group--settings">
+      <label for="elements-per-page" class="form__label pagination__label">Elements per Page</label>
+      <select id="elements-per-page" class="form__control form__control--select pagination__items-per-page">
+        <option value="5">5</option>
+        <option value="10" selected>10</option>
+        <option value="15">15</option>
+        <option value="20">20</option>
+        <option value="25">25</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+      </select>
+    </div>
+  </nav>
+{% endmacro %}

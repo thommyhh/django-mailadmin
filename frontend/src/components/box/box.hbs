@@ -1,0 +1,30 @@
+---
+title: Box
+description: Three letters for a very versatile thingy.
+category: Components
+---
+{{#extend "layouts/components"}}
+{{#content "body"}}
+
+  {{#embed "styleguide/article" title="Text"}}
+  {{#content "body"}}
+    {{> includes/box-text}}
+  {{/content}}
+  {{/embed}}
+
+
+  {{#embed "styleguide/article" title="Login"}}
+  {{#content "body"}}
+    {{> includes/box-login}}
+  {{/content}}
+  {{/embed}}
+
+
+  {{#embed "styleguide/article" title="Form"}}
+  {{#content "body"}}
+    {{> includes/box-form}}
+  {{/content}}
+  {{/embed}}
+
+{{/content}}
+{{/extend}}

@@ -1,0 +1,38 @@
+{% import "../logo/templates.njk" as logo %}
+{% import "../dropdown/templates.njk" as dropdown %}
+
+{% macro default() %}
+  <header class="action-bar action-bar--dark">
+    <div class="action-bar__group">
+      {{ logo.default() }}
+    </div>
+
+    <div class="action-bar__group action-bar__group--flexible action-bar__group--top"></div>
+
+    <div class="action-bar__group action-bar__group--shrink">
+      {% call dropdown.list("Search domain", url = "/dummy/data/domains") %}
+        {{ dropdown.item("Domain 1") }}
+        {{ dropdown.item("Domain 2") }}
+        {{ dropdown.item("Domain 3") }}
+        {{ dropdown.item("Domain 4") }}
+        {{ dropdown.item("Domain 5") }}
+      {% endcall %}
+    </div>
+
+    <div class="action-bar__group">
+      {% call dropdown.list("Search domain", icon = "account", iconOnly = true) %}
+        {{ dropdown.item("Settings") }}
+        {{ dropdown.item("Logout") }}
+      {% endcall %}
+    </div>
+
+    <div class="action-bar__group">
+      <button class="button button--icon">
+        <svg class="button__icon">
+          <use xlink:href="{{ 'assets/icons.svg'|relative }}#power-icon"/>
+        </svg>
+        <span class="button__text sr-only">Log off</span>
+      </button>
+    </div>
+  </header>
+{% endmacro %}

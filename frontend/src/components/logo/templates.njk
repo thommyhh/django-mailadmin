@@ -1,0 +1,6 @@
+{% macro default(dark = false) %}
+  <a href="#" class="logo {% if dark %}logo--dark{% else %}logo--light{% endif %}">
+    <svg class="logo__icon"><use xlink:href="{{ 'assets/logo.svg'|relative }}#logo"/></svg>
+    <span class="logo__text">MailAdmin</span>
+  </a>
+{% endmacro %}
