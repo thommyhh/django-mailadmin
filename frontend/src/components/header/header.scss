@@ -2,84 +2,78 @@
  * Contains filter or actions or a title.
 ============================================================================= */
 
-
-
 .action-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-  padding: 0.6rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	position: relative;
+	padding: 0.6rem;
 
-  background-color: $color-mist;
+	background-color: $color-mist;
 
-  @media (min-width: $break-sm-min) {
-    padding: 1rem;
-  }
+	@media (min-width: $break-sm-min) {
+		padding: 1rem;
+	}
 
-  @media (min-width: $break-md-min) {
-    height: 4em;
-    padding-top: 0;
-    padding-bottom: 0;
-  }
+	@media (min-width: $break-md-min) {
+		height: 4em;
+		padding-top: 0;
+		padding-bottom: 0;
+	}
 }
 
 .action-bar--dark {
-  background-color: $color-charcoal;
+	background-color: $color-charcoal;
 }
-
-
 
 // ACTION BAR GROUP
 // =====================================
 
 .action-bar__group {
-  display: flex;
-  align-items: center;
-  flex-shrink: 0;
-  margin-right: 0.6rem;
+	display: flex;
+	align-items: center;
+	flex-shrink: 0;
+	margin-right: 0.6rem;
 
-  // Fix text-overflow flexbox bug
-  min-width: 0;
+	// Fix text-overflow flexbox bug
+	min-width: 0;
 
-  &:last-child {
-    margin-right: 0;
-  }
+	&:last-child {
+		margin-right: 0;
+	}
 
-  @media (min-width: $break-sm-min) {
-    margin-right: 1rem;
-  }
+	@media (min-width: $break-sm-min) {
+		margin-right: 1rem;
+	}
 }
 
 .action-bar__group--grow {
-  flex-grow: 1;
+	flex-grow: 1;
 }
 
 .action-bar__group--shrink {
-  flex-shrink: 1;
+	flex-shrink: 1;
 }
 
 .action-bar__group--flexible {
-  flex-grow: 1;
-  flex-shrink: 1;
+	flex-grow: 1;
+	flex-shrink: 1;
 }
 
 .action-bar__group--top {
-  align-self: flex-start;
+	align-self: flex-start;
 }
-
-
 
 // ACTION BAR TITLE
 // =====================================
 
 .action-bar__title {
-  margin: 0;
-  overflow: hidden;
+	margin: 0;
+	overflow: hidden;
 
-  font-size: 1.4em;
-  font-weight: 300;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  color: $color-shadow;
+	font-size: 1.4em;
+	font-weight: 300;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	color: $color-shadow;
 }

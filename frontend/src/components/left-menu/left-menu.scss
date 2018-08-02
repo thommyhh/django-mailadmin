@@ -2,150 +2,140 @@
  * Context-sensitive links for additional actions.
 ============================================================================= */
 
-
-
 .nav-sidebar {
-  height: 100%;
+	height: 100%;
 }
 
 .nav-sidebar-cover {
-  position: absolute;
-  visibility: hidden;
-  top: 3.7rem; // Magic number vor header height
-  bottom: 0;
-  left: 0;
-  right: 0;
-  opacity: 0;
+	position: absolute;
+	visibility: hidden;
+	top: 3.7rem; // Magic number vor header height
+	bottom: 0;
+	left: 0;
+	right: 0;
+	opacity: 0;
 
-  z-index: $z-index-nav-cover;
+	z-index: $z-index-nav-cover;
 
-  background-color: rgba(0, 0, 0, 0.8);
+	background-color: rgba(0, 0, 0, 0.8);
 
-  transition: visibility 0.2s, opacity 0.2s;
-  will-change: opacity;
+	transition: visibility 0.2s, opacity 0.2s;
+	will-change: opacity;
 
-  &.is-visible {
-    visibility: visible;
-    opacity: 1;
-  }
+	&.is-visible {
+		visibility: visible;
+		opacity: 1;
+	}
 
-  @media (min-width: $break-sm-min) {
-    top: 4.5rem; // Magic number vor header height
-  }
+	@media (min-width: $break-sm-min) {
+		top: 4.5rem; // Magic number vor header height
+	}
 
-  @media (min-width: $break-md-min) {
-    top: 4rem; // Magic number vor header height
-  }
+	@media (min-width: $break-md-min) {
+		top: 4rem; // Magic number vor header height
+	}
 
-  @media (min-width: $break-lg-min) {
-    display: none;
-  }
+	@media (min-width: $break-lg-min) {
+		display: none;
+	}
 }
-
-
 
 // NAV SIDEBAR LIST
 // =====================================
 
 .nav-sidebar__list {
-  position: relative;
-  height: 100%;
-  margin: 0;
-  padding: 0;
+	position: relative;
+	height: 100%;
+	margin: 0;
+	padding: 0;
 
-  overflow-y: auto;
+	overflow-y: auto;
 
-  background-color: $color-mist;
+	background-color: $color-mist;
 
-  @media (min-width: $break-md-min) {
-    padding-bottom: 2em;
-  }
+	@media (min-width: $break-md-min) {
+		padding-bottom: 2em;
+	}
 
-  @media (min-width: $break-lg-min) {
-    border-right: 1px solid rgba(0, 0, 0, 0.1);
-  }
+	@media (min-width: $break-lg-min) {
+		border-right: 1px solid rgba(0, 0, 0, 0.1);
+	}
 }
-
-
 
 // NAV SIDEBAR ITEM
 // =====================================
 
 .nav-sidebar__item {
-  display: block;
-  position: relative;
+	display: block;
+	position: relative;
 
-  &::after {
-    content: "";
-    position: absolute;
-    height: 1px;
-    bottom: 0;
-    left: 0.6rem;
-    right: 0.6rem;
+	&::after {
+		content: "";
+		position: absolute;
+		height: 1px;
+		bottom: 0;
+		left: 0.6rem;
+		right: 0.6rem;
 
-    background-color: rgba(0, 0, 0, 0.1);
+		background-color: rgba(0, 0, 0, 0.1);
 
-    @media (min-width: $break-sm-min) {
-      left: 1rem;
-      right: 1rem;
-    }
-  }
+		@media (min-width: $break-sm-min) {
+			left: 1rem;
+			right: 1rem;
+		}
+	}
 }
-
-
 
 // NAV SIDEBAR LINK
 // =====================================
 
 .nav-sidebar__link {
-  display: flex;
-  align-items: center;
-  padding: 1em 0.6rem;
+	display: flex;
+	align-items: center;
+	padding: 1em 0.6rem;
 
-  outline: none;
+	outline: none;
 
-  font-weight: 300;
-  text-decoration: none;
-  color: $color-charcoal;
+	font-weight: 300;
+	text-decoration: none;
+	color: $color-charcoal;
 
-  &:hover,
-  &:focus {
-    color: $color-white;
-    background-color: $color-orange;
-  }
+	&:hover,
+	&:focus {
+		color: $color-white;
+		background-color: $color-orange;
+	}
 
-  @media (min-width: $break-sm-min) {
-    padding-left: 1rem;
-  }
+	@media (min-width: $break-sm-min) {
+		padding-left: 1rem;
+	}
 
-  @media (min-width: $break-md-min) {
-    padding-right: 4rem;
-  }
+	@media (min-width: $break-md-min) {
+		padding-right: 4rem;
+	}
 
-  @media (min-width: $break-lg-min) {
-    padding: 0 1rem;
-    height: 4em;
-  }
+	@media (min-width: $break-lg-min) {
+		padding: 0 1rem;
+		height: 4em;
+	}
 }
 
 .nav-sidebar__link--highlight {
-  color: $color-white;
-  background-color: $color-orange;
+	color: $color-white;
+	background-color: $color-orange;
 }
 
 .nav-sidebar__link--muted {
-  color: $color-shadow;
+	color: $color-shadow;
 }
-
-
 
 // NAV SIDEBAR ICON
 // =====================================
 
 .nav-sidebar__icon {
-  width: 1em;
-  height: 1em;
-  margin-right: 0.2em;
+	width: 1em;
+	height: 1em;
+	margin-right: 0.2em;
 
-  fill: currentColor;
+	fill: currentColor;
 }

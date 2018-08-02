@@ -1,87 +1,78 @@
 /* UTILITIES
 ============================================================================= */
 
-
-
 // SCREENREADER ONLY
 // =====================================
 
 .sr-only {
-  @include sr-only;
+	@include sr-only;
 }
-
 
 // Use in conjunction with .sr-only to only display content when it's focused.
 
 .sr-only-focusable {
-  @include sr-only-focusable;
+	@include sr-only-focusable;
 }
-
-
 
 // SCREENREADER ONLY for DISTINCT SPAN
 // =====================================
 
 .sr-only-xs {
-  @media (max-width: $break-xs-max) {
-    @include sr-only;
-  }
+	@media (max-width: $break-xs-max) {
+		@include sr-only;
+	}
 }
 
 .sr-only-sm {
-  @media (min-width: $break-sm-min) and (max-width: $break-sm-max) {
-    @include sr-only;
-  }
+	@media (min-width: $break-sm-min) and (max-width: $break-sm-max) {
+		@include sr-only;
+	}
 }
 
 .sr-only-md {
-  @media (min-width: $break-md-min) and (max-width: $break-md-max) {
-    @include sr-only;
-  }
+	@media (min-width: $break-md-min) and (max-width: $break-md-max) {
+		@include sr-only;
+	}
 }
 
 .sr-only-lg {
-  @media (min-width: $break-lg-min) and (max-width: $break-lg-max) {
-    @include sr-only;
-  }
+	@media (min-width: $break-lg-min) and (max-width: $break-lg-max) {
+		@include sr-only;
+	}
 }
 
 .sr-only-xl {
-  @media (min-width: $break-xl-min) {
-    @include sr-only;
-  }
+	@media (min-width: $break-xl-min) {
+		@include sr-only;
+	}
 }
-
-
 
 // SCREENREADER ONLY below BREAKPOINT
 // =====================================
 
 .sr-only-below-sm {
-  @media (max-width: $break-xs-max) {
-    @include sr-only;
-  }
+	@media (max-width: $break-xs-max) {
+		@include sr-only;
+	}
 }
 
 .sr-only-below-md {
-  @media (max-width: $break-sm-max) {
-    @include sr-only;
-  }
+	@media (max-width: $break-sm-max) {
+		@include sr-only;
+	}
 }
 
 .sr-only-below-lg {
-  @media (max-width: $break-md-max) {
-    @include sr-only;
-  }
+	@media (max-width: $break-md-max) {
+		@include sr-only;
+	}
 }
 
 .sr-only-below-xl {
-  @media (max-width: $break-lg-max) {
-    @include sr-only;
-  }
+	@media (max-width: $break-lg-max) {
+		@include sr-only;
+	}
 }
-
-
 
 // HIDE for EVERYONE
 // (even screen readers)
@@ -89,35 +80,35 @@
 
 /* stylelint-disable declaration-no-important */
 .hide {
-  display: none !important;
+	display: none !important;
 }
 
 .hide-xs {
-  @media (max-width: $break-xs-max) {
-    display: none !important;
-  }
+	@media (max-width: $break-xs-max) {
+		display: none !important;
+	}
 }
 
 .hide-sm {
-  @media (min-width: $break-sm-min) and (max-width: $break-sm-max) {
-    display: none !important;
-  }
+	@media (min-width: $break-sm-min) and (max-width: $break-sm-max) {
+		display: none !important;
+	}
 }
 
 .hide-md {
-  @media (min-width: $break-md-min) and (max-width: $break-md-max) {
-    display: none !important;
-  }
+	@media (min-width: $break-md-min) and (max-width: $break-md-max) {
+		display: none !important;
+	}
 }
 
 .hide-lg {
-  @media (min-width: $break-lg-min) and (max-width: $break-lg-max) {
-    display: none !important;
-  }
+	@media (min-width: $break-lg-min) and (max-width: $break-lg-max) {
+		display: none !important;
+	}
 }
 
 .hide-xl {
-  @media (min-width: $break-xl-min) {
-    display: none !important;
-  }
+	@media (min-width: $break-xl-min) {
+		display: none !important;
+	}
 }

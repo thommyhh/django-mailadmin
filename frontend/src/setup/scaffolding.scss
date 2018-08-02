@@ -4,18 +4,18 @@
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 html {
-  font-size: $font-size-xs; // Cf. _variables.scss for pixel values
-  font-family: $font-stack;
+	font-size: $font-size-xs; // Cf. _variables.scss for pixel values
+	font-family: $font-stack;
 
-  @media (min-width: $break-sm-min) {
-    font-size: $font-size-sm;
-  }
+	@media (min-width: $break-sm-min) {
+		font-size: $font-size-sm;
+	}
 
-  @media (min-width: $break-md-min) {
-    font-size: $font-size-md;
-  }
+	@media (min-width: $break-md-min) {
+		font-size: $font-size-md;
+	}
 }

@@ -2,92 +2,85 @@
  * The one and the only.
 ============================================================================= */
 
-
-
 // LOGO MAILADMIN
 // =====================================
 
 .logo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 
-  font-size: 2em;
-  text-decoration: none;
+	font-size: 2em;
+	text-decoration: none;
 }
 
 .logo--dark {
-  color: $color-shadow;
+	color: $color-shadow;
 }
 
 .logo--light {
-  color: $color-white;
+	color: $color-white;
 }
-
 
 // Logo Icon
 
 .logo__icon {
-  flex-shrink: 0;
-  width: 1.2em;
-  height: 1.2em;
+	flex-shrink: 0;
+	width: 1.2em;
+	height: 1.2em;
 
-  fill: currentColor;
+	fill: currentColor;
 }
 
 .logo__icon--header {
-  width: 1em;
-  height: 1em;
+	width: 1em;
+	height: 1em;
 
-  @media (min-width: $break-sm-min) {
-    width: 1.2em;
-    height: 1.2em;
-  }
+	@media (min-width: $break-sm-min) {
+		width: 1.2em;
+		height: 1.2em;
+	}
 }
-
 
 // Logo Text
 
 .logo__text {
-  flex-shrink: 0;
-  margin-left: 0.4em;
+	flex-shrink: 0;
+	margin-left: 0.4em;
 }
 
 .logo__text--header {
-  display: none;
+	display: none;
 
-  @media (min-width: $break-md-min) {
-    display: block;
-  }
+	@media (min-width: $break-md-min) {
+		display: block;
+	}
 }
-
-
 
 // LOGO KAPP-HAMBURG
 // =====================================
 
 .logo-kapp-hamburg {
-  .monochrome,
-  .color {
-    fill: $color-silver;
-    transition: fill 0.2s;
-  }
+	.monochrome,
+	.color {
+		fill: $color-silver;
+		transition: fill 0.2s;
+	}
 
-  &:hover {
-    .monochrome {
-      fill: lighten($color-silver, 20%);
-    }
+	&:hover {
+		.monochrome {
+			fill: lighten($color-silver, 20%);
+		}
 
-    .color {
-      fill: lighten($color-orange, 20%);
-    }
-  }
+		.color {
+			fill: lighten($color-orange, 20%);
+		}
+	}
 }
-
 
 // Logo Kapp-Hamburg Icon
 
 .logo-kapp-hamburg__icon {
-  display: block;
-  height: 1em;
+	display: block;
+	height: 1em;
 }

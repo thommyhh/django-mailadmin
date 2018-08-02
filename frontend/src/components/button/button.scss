@@ -2,179 +2,177 @@
  * All your button styles go in this file.
 ============================================================================= */
 
-
-
 // DEFAULT BUTTON
 // =====================================
 
 .button {
-  display: inline-block;
-  position: relative;
-  height: 2.5em;
-  padding: 0.71em 1em; // Magic number for vertically centered a text
-  vertical-align: middle;
-  white-space: nowrap;
+	display: inline-block;
+	position: relative;
+	height: 2.5em;
+	padding: 0.71em 1em; // Magic number for vertically centered a text
+	vertical-align: middle;
+	white-space: nowrap;
 
-  background-color: $color-shadow;
+	background-color: $color-shadow;
 
-  border: none;
-  border-radius: 0.2em;
-  outline: none;
+	border: none;
+	border-radius: 0.2em;
+	outline: none;
 
-  font-size: 1em;
-  font-weight: 300;
-  text-align: center;
-  text-transform: uppercase;
-  text-decoration: none;
-  color: $color-white;
+	font-size: 1em;
+	font-weight: 300;
+	text-align: center;
+	text-transform: uppercase;
+	text-decoration: none;
+	color: $color-white;
 
-  cursor: pointer;
+	cursor: pointer;
 
-  &:hover,
-  &:focus {
-    background-color: darken($color-shadow, 15%);
-  }
+	&:hover,
+	&:focus {
+		background-color: darken($color-shadow, 15%);
+	}
 
-  &:active {
-    background-color: darken($color-shadow, 25%);
-  }
+	&:active {
+		background-color: darken($color-shadow, 25%);
+	}
 
-  @media (min-width: $break-md-min) {
-    height: 2.2222222222em;
-    padding: 0.57em 0.8em; // Magic number for vertically centered a text
+	@media (min-width: $break-md-min) {
+		height: 2.2222222222em;
+		padding: 0.57em 0.8em; // Magic number for vertically centered a text
 
-    font-size: 0.9em;
-  }
+		font-size: 0.9em;
+	}
 
-  &--icon {
-    padding-left: 2.4em;
-    text-align: left;
+	&--icon {
+		padding-left: 2.4em;
+		text-align: left;
 
-    @media (min-width: $break-md-min) {
-      padding-left: 2em;
-    }
-  }
+		@media (min-width: $break-md-min) {
+			padding-left: 2em;
+		}
+	}
 
-  // DEFAULT BUTTON with HIGHLIGHT
-  // =====================================
+	// DEFAULT BUTTON with HIGHLIGHT
+	// =====================================
 
-  &--highlight {
-    background-color: $color-orange;
+	&--highlight {
+		background-color: $color-orange;
 
-    &:hover,
-    &:focus {
-      background-color: darken($color-orange, 15%);
-    }
+		&:hover,
+		&:focus {
+			background-color: darken($color-orange, 15%);
+		}
 
-    &:active {
-      background-color: darken($color-orange, 25%);
-    }
-  }
+		&:active {
+			background-color: darken($color-orange, 25%);
+		}
+	}
 
-  // ICON for BUTTONS
-  // =====================================
+	// ICON for BUTTONS
+	// =====================================
 
-  &__icon {
-    position: absolute;
-    height: 1.4em;
-    width: 1.4em;
-    top: 50%;
-    left: 1em;
-    transform: translateY(-50%);
+	&__icon {
+		position: absolute;
+		height: 1.4em;
+		width: 1.4em;
+		top: 50%;
+		left: 1em;
+		transform: translateY(-50%);
 
-    fill: currentColor;
+		fill: currentColor;
 
-    @media (min-width: $break-md-min) {
-      height: 1.2em;
-      width: 1.2em;
-      left: 0.8em;
-    }
-  }
+		@media (min-width: $break-md-min) {
+			height: 1.2em;
+			width: 1.2em;
+			left: 0.8em;
+		}
+	}
 
-  // TEXT for BUTTONS
-  // =====================================
+	// TEXT for BUTTONS
+	// =====================================
 
-  &--icon &__text {
-    margin-left: 0.8em;
+	&--icon &__text {
+		margin-left: 0.8em;
 
-    @media (min-width: $break-md-min) {
-      margin-left: 0.6em;
-    }
-  }
+		@media (min-width: $break-md-min) {
+			margin-left: 0.6em;
+		}
+	}
 
 }
 
 // ICON BUTTON
 // =====================================
 .icon-button {
-  display: inline-block;
-  position: relative;
-  width: 3.4em;
-  height: 2.5em;
-  padding: 0;
-  vertical-align: middle;
+	display: inline-block;
+	position: relative;
+	width: 3.4em;
+	height: 2.5em;
+	padding: 0;
+	vertical-align: middle;
 
-  background: none;
+	background: none;
 
-  border: none;
-  border-radius: 0.2em;
-  outline: none;
+	border: none;
+	border-radius: 0.2em;
+	outline: none;
 
-  font-size: 1em;
-  color: $color-shadow;
+	font-size: 1em;
+	color: $color-shadow;
 
-  cursor: pointer;
+	cursor: pointer;
 
-  &:hover,
-  &:focus {
-    background-color: rgba(0, 0, 0, 0.1);
-  }
+	&:hover,
+	&:focus {
+		background-color: rgba(0, 0, 0, 0.1);
+	}
 
-  &:active {
-    background-color: rgba(0, 0, 0, 0.2);
-  }
+	&:active {
+		background-color: rgba(0, 0, 0, 0.2);
+	}
 
-  @media (min-width: $break-md-min) {
-    width: 2.5em;
-    height: 2em;
-  }
+	@media (min-width: $break-md-min) {
+		width: 2.5em;
+		height: 2em;
+	}
 
-  &--light {
-    color: $color-white;
-  }
+	&--light {
+		color: $color-white;
+	}
 
-  &__icon {
-    position: absolute;
-    height: 1.8em;
-    width: 1.8em;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+	&__icon {
+		position: absolute;
+		height: 1.8em;
+		width: 1.8em;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
 
-    fill: currentColor;
+		fill: currentColor;
 
-    @media (min-width: $break-md-min) {
-      height: 1.6em;
-      width: 1.6em;
-    }
+		@media (min-width: $break-md-min) {
+			height: 1.6em;
+			width: 1.6em;
+		}
 
-    .icon-button--active-rotate.is-active & {
-      transform: translate(-50%, -50%) rotate(180deg);
-    }
-  }
+		.icon-button--active-rotate.is-active & {
+			transform: translate(-50%, -50%) rotate(180deg);
+		}
+	}
 }
 
 // BUTTON ADDITIONAL LINK
 // =====================================
 
 .button-additional-link {
-  margin-left: 1em;
-  color: $color-shadow;
+	margin-left: 1em;
+	color: $color-shadow;
 
-  text-decoration: none;
+	text-decoration: none;
 
-  &:hover,
-  &:focus {
-    text-decoration: underline;
-  }
+	&:hover,
+	&:focus {
+		text-decoration: underline;
+	}
 }

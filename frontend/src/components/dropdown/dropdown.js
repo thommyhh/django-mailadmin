@@ -76,7 +76,7 @@ export default function(dropDown) {
 		dropDown.addEventListener('click', ev => {
 			ev.preventDefault()
 			if (isOpen()) {
-				close();
+				close()
 			} else {
 				open()
 			}
