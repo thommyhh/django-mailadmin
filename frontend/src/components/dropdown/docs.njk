@@ -40,12 +40,6 @@
   {% endsection %}
 
   {% section title="Autocomplete", description="Dropdown with autocomplete" %}
-    {% call dropdown.list("Dropdown 1", url = '/dummy/data/auto-complete') %}
-      {{ dropdown.item("Dropdown item #1") }}
-      {{ dropdown.item("Dropdown item #2") }}
-      {{ dropdown.item("Dropdown item #3") }}
-      {{ dropdown.item("Dropdown item #4") }}
-      {{ dropdown.item("Dropdown item #5") }}
-    {% endcall %}
+    {{ dropdown.list("Dropdown 1", icon = 'search', url = '/dummy/data/auto-complete') }}
   {% endsection %}
 {% endblock %}

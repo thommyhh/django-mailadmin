@@ -1,28 +1,101 @@
-/* eslint-disable no-unused-vars */
-import toggle from '../../functions/toggle'
-import toggleInput from '../../functions/toggleInput'
-/* DROPDOWN
- * Click a button and an awesome menu pops up.
-============================================================================= */
+/* globals AbortController, fetch */
+import getParents from 'dom-parents'
+/**
+ * The drop-down/auto-complete element
+ * @param dropDown HTMLElement
+ * @returns {{}}
+ */
+export default function(dropDown) {
+	/**
+	 * The expanding/collapsing panel
+	 */
+	let panel
+	/**
+	 * The abort controller to abort fetch requests
+	 */
+	let abortController
+	/**
+	 * Initialize the element
+	 *
+	 * @param dropDown HTMLElement
+	 */
+	let initialize = function(dropDown) {
+		panel = dropDown.querySelector('.js-dropdown-panel')
 
-/* globals toggle, toggleInput */
+		if (dropDown.dataset.url) {
+			initializeAutoComplete(dropDown)
+		} else {
+			initializeDropDown(dropDown)
+		}
+		document.addEventListener('click', ev => {
+			if (ev.target !== dropDown) {
+				let closeDropDown = true
+				let parentElements = getParents(ev.target)
+				parentElements.forEach(element => {
+					if (element === dropDown) {
+						closeDropDown = false
+					}
+				})
+				if (closeDropDown) {
+					close()
+				}
+			}
+		})
+	}
 
-(function() {
-  'use strict'
+	/**
+	 * Initialize the auto-complete element
+	 *
+	 * @param dropDown HTMLElement
+	 */
+	let initializeAutoComplete = function(dropDown) {
+		abortController = new AbortController()
+		let input = dropDown.querySelector('.js-auto-complete-input')
+		input.addEventListener('keyup', () => {
+			if (input.value.length >= 3) {
+				fetch(dropDown.dataset.url + '?q=' + encodeURIComponent(input.value), {
+					method: 'GET',
+					credentials: 'same-origin',
+					signal: abortController.signal
+				}).then(response => {
+					response.text().then(responseText => {
+						panel.innerHTML = responseText
+						open()
+					})
+				})
+			}
+		})
+	}
 
-  let items = document.getElementsByClassName('js-dropdown')
+	/**
+	 * Initialize the normal drop-down element
+	 *
+	 * @param dropDown HTMLElement
+	 */
+	let initializeDropDown = function(dropDown) {
+		dropDown.addEventListener('click', ev => {
+			ev.preventDefault()
+			if (isOpen()) {
+				close();
+			} else {
+				open()
+			}
+		})
+	}
 
-  for (let i = 0; i < items.length; i++) {
-    toggle(items[i], 'is-active', 'is-visible')
-  }
-})();
+	let isOpen = function() {
+		return dropDown.classList.contains('is-visible')
+	}
 
-(function() {
-  'use strict'
+	let open = function() {
+		dropDown.classList.add('is-visible')
+	}
 
-  let items = document.getElementsByClassName('js-form-autocomplete')
+	let close = function() {
+		dropDown.classList.remove('is-visible')
+	}
 
-  for (let i = 0; i < items.length; i++) {
-    toggleInput(items[i], 'is-active', 'is-visible')
-  }
-})()
+	initialize(dropDown)
+
+	return {}
+}

@@ -13,8 +13,8 @@ root = true
 [*]
 
 # Indentation
-indent_style = space
-indent_size = 2
+indent_style = tabs
+indent_size = 4
 
 # Line endings and trailing whitespace
 end_of_line = lf

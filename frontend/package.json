@@ -1,84 +1,87 @@
 {
-  "name": "mailadmin-frontend",
-  "description": "Frontend build for the Mailadmin application",
-  "version": "1.0.0",
-  "author": {
-    "name": "Thorben Nissen",
-    "email": "thorben.nissen@kapp-hamburg.de"
-  },
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/thommyhh/django-mailadmin"
-  },
-  "bugs": {
-    "url": "https://github.com/thommyhh/django-mailadmin/issues",
-    "email": "thorben.nissen@kapp-hamburg.de"
-  },
-  "scripts": {
-    "dev": "front-end-styleguide dev",
-    "build": "front-end-styleguide build",
-    "build:dev": "front-end-styleguide build:dev",
-    "build:proto": "front-end-styleguide build:proto",
-    "icons": "gulp svg-sprite",
-    "lint": "run-s -n lint:js lint:css lint:html",
-    "lint:js": "eslint \"**/*.js\"",
-    "lint:css": "stylelint \"**/*.?(s)css\" --syntax scss",
-    "lint:html": "front-end-styleguide lint:html",
-    "test": "run-s -n test:unit test:e2e",
-    "test:unit": "nyc ava",
-    "test:e2e": "testcafe chrome:headless,firefox:headless src/**/*.e2e.js --app \"front-end-styleguide dev\" --app-init-delay 4000"
-  },
-  "ava": {
-    "verbose": true,
-    "files": [
-      "src/**/*.unit.js"
-    ]
-  },
-  "nyc": {
-    "all": true,
-    "require": [
-      "babel-register"
-    ],
-    "include": [
-      "src"
-    ],
-    "exclude": [
-      "src/main.js",
-      "src/**/*.e2e.js",
-      "src/**/*.unit.js"
-    ],
-    "reporter": [
-      "text",
-      "text-summary",
-      "html"
-    ]
-  },
-  "dependencies": {
-    "normalize.css": "^8.0.0"
-  },
-  "devDependencies": {
-    "autoprefixer": "^8.1.0",
-    "ava": "^0.25.0",
-    "babel-preset-env": "^1.6.1",
-    "eslint": "^4.18.2",
-    "eslint-config-standard": "^11.0.0",
-    "eslint-plugin-ava": "^4.5.1",
-    "eslint-plugin-import": "^2.9.0",
-    "eslint-plugin-node": "^6.0.1",
-    "eslint-plugin-promise": "^3.7.0",
-    "eslint-plugin-standard": "^3.0.1",
-    "eslint-plugin-testcafe": "^0.2.1",
-    "front-end-styleguide": "^4.7.0",
-    "gulp": "^3.9.1",
-    "gulp-svg-sprites": "^4.1.2",
-    "npm-run-all": "^4.1.2",
-    "nyc": "^11.4.1",
-    "stylelint": "^9.1.1",
-    "stylelint-config-sass-guidelines": "^5.0.0",
-    "testcafe": "^0.19.0"
-  },
-  "engines": {
-    "node": ">= 8.6.0"
-  }
+	"name": "mailadmin-frontend",
+	"description": "Frontend build for the Mailadmin application",
+	"version": "1.0.0",
+	"author": {
+		"name": "Thorben Nissen",
+		"email": "thorben.nissen@kapp-hamburg.de"
+	},
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/thommyhh/django-mailadmin"
+	},
+	"bugs": {
+		"url": "https://github.com/thommyhh/django-mailadmin/issues",
+		"email": "thorben.nissen@kapp-hamburg.de"
+	},
+	"scripts": {
+		"dev": "front-end-styleguide dev",
+		"build": "front-end-styleguide build",
+		"build:dev": "front-end-styleguide build:dev",
+		"build:proto": "front-end-styleguide build:proto",
+		"icons": "gulp svg-sprite",
+		"lint": "run-s -n lint:js lint:css lint:html",
+		"lint:js": "eslint \"**/*.js\"",
+		"lint:css": "stylelint \"**/*.?(s)css\" --syntax scss",
+		"lint:html": "front-end-styleguide lint:html",
+		"test": "run-s -n test:unit test:e2e",
+		"test:unit": "nyc ava",
+		"test:e2e": "testcafe chrome:headless,firefox:headless src/**/*.e2e.js --app \"front-end-styleguide dev\" --app-init-delay 4000"
+	},
+	"ava": {
+		"verbose": true,
+		"files": [
+			"src/**/*.unit.js"
+		]
+	},
+	"nyc": {
+		"all": true,
+		"require": [
+			"babel-register"
+		],
+		"include": [
+			"src"
+		],
+		"exclude": [
+			"src/main.js",
+			"src/**/*.e2e.js",
+			"src/**/*.unit.js"
+		],
+		"reporter": [
+			"text",
+			"text-summary",
+			"html"
+		]
+	},
+	"dependencies": {
+		"normalize.css": "^8.0.0"
+	},
+	"devDependencies": {
+		"autoprefixer": "^8.1.0",
+		"ava": "^0.25.0",
+		"babel-preset-env": "^1.6.1",
+		"dom-parents": "^1.0.2",
+		"eslint": "^4.18.2",
+		"eslint-config-standard": "^11.0.0",
+		"eslint-plugin-ava": "^4.5.1",
+		"eslint-plugin-import": "^2.9.0",
+		"eslint-plugin-node": "^6.0.1",
+		"eslint-plugin-promise": "^3.7.0",
+		"eslint-plugin-standard": "^3.0.1",
+		"eslint-plugin-testcafe": "^0.2.1",
+		"fetch-mock": "^6.5.2",
+		"front-end-styleguide": "^4.9.0",
+		"gulp": "^3.9.1",
+		"gulp-svg-sprites": "^4.1.2",
+		"npm-run-all": "^4.1.2",
+		"nunjucks": "^3.1.3",
+		"nyc": "^11.4.1",
+		"stylelint": "^9.1.1",
+		"stylelint-config-sass-guidelines": "^5.0.0",
+		"testcafe": "^0.19.0"
+	},
+	"engines": {
+		"node": ">= 8.6.0"
+	}
 }

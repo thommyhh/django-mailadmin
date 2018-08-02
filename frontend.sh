@@ -15,7 +15,7 @@ case "$cmd" in
         npmCmd="npm run $cmd"
         ;;
     setup)
-        yarnCmd="yarn --network-concurrency 1"
+        yarnCmd="yarn"
         npmCmd="npm install"
         ;;
     *)

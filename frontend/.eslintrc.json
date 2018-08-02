@@ -1,14 +1,24 @@
 {
-  "root": true,
-  "plugins": ["ava"],
-  "extends": [
-    "standard",
-    "plugin:ava/recommended",
-    "plugin:testcafe/recommended"
-  ],
-  "rules": {
-    "no-warning-comments": "warn",
-    "quotes": ["error", "single"],
-    "space-before-function-paren": "off"
-  }
+    "root": true,
+    "plugins": [
+        "ava"
+    ],
+    "extends": [
+        "standard",
+        "plugin:ava/recommended",
+        "plugin:testcafe/recommended"
+    ],
+    "rules": {
+        "no-warning-comments": "warn",
+        "quotes": [
+            "error",
+            "single"
+        ],
+        "space-before-function-paren": "off",
+        "indent": [
+            "error",
+            "tab"
+        ],
+        "no-tabs": "off"
+    }
 }

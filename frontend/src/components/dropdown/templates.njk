@@ -3,11 +3,11 @@
 {% endmacro %}
 
 {% macro list(text, icon = null, iconOnly = false, url = null) -%}
-<div class="dropdown {% if url %}js-form-autocomplete{% else %}js-dropdown{% endif %}"{% if url %} data-url="{{ url }}"{% endif %}>
+<div class="dropdown {% if url %}js-auto-complete{% else %}js-dropdown{% endif %}"{% if url %} data-url="{{ url }}"{% endif %}>
   {% if url -%}
     <form class="form form--dark">
       <label for="domain" class="sr-only">{{ text }}</label>
-      <input type="text" id="domain" placeholder="{{ text }}" class="form__control form__control--input input--dark dropdown__input js-form-autocomplete-input">
+      <input type="text" id="domain" placeholder="{{ text }}" class="form__control form__control--input input--dark form__control--search js-auto-complete-input">
     </form>
   {%- else -%}
   <button class="button{% if icon %} button--icon{% endif %} dropdown__button js-toggle-button">
@@ -21,9 +21,11 @@
   </button>
   {%- endif %}
 
-  <div class="dropdown__panel {% if url %}dropdown__panel--full js-form-autocomplete-panel{% else %}dropdown__panel--menu js-toggle-panel{% endif %}">
+  <div class="dropdown__panel {% if url %}dropdown__panel--full{% else %}dropdown__panel--menu{% endif %} js-dropdown-panel">
     <ul class="dropdown__list">
+      {% if caller is defined %}
       {{ caller() }}
+      {% endif %}
     </ul>
   </div>
 </div>
