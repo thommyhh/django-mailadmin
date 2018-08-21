@@ -1,0 +1,19 @@
+{% import '../components/header/templates.njk' as header %}
+{% import '../components/footer/templates.njk' as footer %}
+
+{% extends './prototypes.njk' %}
+
+{% block body %}
+    <div class="container">
+        <div class="container__header">
+            {{ header.default() }}
+        </div>
+        <div class="container__content">
+            {% block content %}
+            {% endblock %}
+        </div>
+        <div class="container__footer">
+            {{ footer.dummy() }}
+        </div>
+    </div>
+{% endblock %}

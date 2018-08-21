@@ -1,26 +1,33 @@
-{% macro default(headline, text, type, icon) %}
-  <div class="notification notification--{{ type }}">
-    <div class="notification__group">
-      <svg class="notification__icon"><use xlink:href="{{ 'assets/icons.svg'|relative }}#{{ icon }}-icon"/></svg>
-    </div>
+{% macro default(headline, message, type, icon, hidden = false) %}
+	<div class="notification{% if type %} notification--{{ type }}{% endif %}{% if hidden %} is-hidden{% endif %} js-notification">
+		<div class="notification__group">
+			<svg class="notification__icon notification__icon--success">
+				<use xlink:href="{{ 'assets/icons.svg'|relative }}#check-icon"/>
+			</svg>
+			<svg class="notification__icon notification__icon--error">
+				<use xlink:href="{{ 'assets/icons.svg'|relative }}#error-icon"/>
+			</svg>
+		</div>
 
-    <div class="notification__group notification__group--flexible">
-      <p class="notification__headline">{{ headline }}</p>
-      <p class="notification__text">{{ message }}</p>
-    </div>
+		<div class="notification__group notification__group--flexible">
+			<p class="notification__headline js-notification-headline">{{ headline }}</p>
+			<p class="notification__text js-notification-message">{{ message }}</p>
+		</div>
 
-    <div class="notification__group">
-      <button class="icon-button icon-button--light">
-        <svg class="icon-button__icon"><use xlink:href="{{ 'assets/icons.svg'|relative }}#close-icon"/></svg>
-      </button>
-    </div>
-  </div>
+		<div class="notification__group">
+			<button class="icon-button icon-button--light js-notification-close">
+				<svg class="icon-button__icon">
+					<use xlink:href="{{ 'assets/icons.svg'|relative }}#close-icon"/>
+				</svg>
+			</button>
+		</div>
+	</div>
 {% endmacro %}
 
 {% macro success(headline, text) %}
-  {{ default(headline, text, "success", "check") }}
+	{{ default(headline, text, "success", "check") }}
 {% endmacro %}
 
 {% macro error(headline, text) %}
-  {{ default(headline, text, "error", "error") }}
+	{{ default(headline, text, "error", "error") }}
 {% endmacro %}

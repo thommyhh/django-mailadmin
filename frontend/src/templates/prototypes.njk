@@ -1,21 +1,23 @@
+{% import '../components/notification/templates.njk' as notification %}
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    {% if page.title %}
-      <title>{{ page.title }}</title>
-    {% endif %}
-    {% if page.description %}
-      <meta name="description" content="{{ page.description }}">
-    {% endif %}
+	{% if page.title %}
+		<title>{{ page.title }}</title>
+	{% endif %}
+	{% if page.description %}
+		<meta name="description" content="{{ page.description }}">
+	{% endif %}
 
-    {{ fesg.head }}
-  </head>
-  <body>
-    {{ fesg.sidebar }}
-    {% block body %}{% endblock %}
-  </body>
+	{{ fesg.head }}
+</head>
+<body>
+{{ fesg.sidebar }}
+{% block body %}{% endblock %}
+{{ notification.default(hidden = true) }}
+</body>
 </html>

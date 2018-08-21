@@ -19,3 +19,117 @@ html {
 		font-size: $font-size-md;
 	}
 }
+
+body {
+	display: flex;
+	flex-flow: column nowrap;
+}
+
+/* CONTAINER
+ * Let's align all the components we once created.
+============================================================================= */
+
+// CONTAINER FIXED
+// =====================================
+
+.container {
+	display: flex;
+	flex-flow: column nowrap;
+	height: 100vh;
+	overflow: hidden;
+}
+
+.container__header {
+	flex-shrink: 0;
+	flex-grow: 0;
+}
+
+.container__footer {
+	flex-shrink: 0;
+	flex-grow: 0;
+	z-index: $z-index-footer;
+}
+
+.container__sidebar {
+	position: fixed;
+	width: 75%;
+	top: 3.7rem; // Magic number for header height
+	bottom: 0;
+	left: 0;
+	right: 0;
+	transform: translateX(-100%);
+
+	z-index: $z-index-nav-sidebar;
+
+	transition: transform 0.2s;
+	will-change: transform;
+
+	&.is-visible {
+		transform: translateX(0);
+	}
+
+	@media (min-width: $break-sm-min) {
+		width: 60%;
+		top: 4.5rem; // Magic number for header height
+	}
+
+	@media (min-width: $break-md-min) {
+		width: 50%;
+		top: 4rem; // Magic number vor header height
+	}
+
+	@media (min-width: $break-lg-min) {
+		width: 280px;
+		transform: none;
+	}
+}
+
+// Some other stuff
+// =====================================
+.container__content {
+	flex-shrink: 1;
+	flex-grow: 1;
+	display: flex;
+	flex-flow: column nowrap;
+}
+
+.container__main {
+	height: 100%;
+	overflow: hidden;
+	display: flex;
+	flex-flow: column nowrap;
+	flex-shrink: 1;
+	flex-grow: 1;
+	position: relative;
+
+	&::after {
+		content: "";
+		display: block;
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		background-color: rgba(0, 0, 0, 0);
+		transition: background-color $animation-type $animation-duration;
+		pointer-events: none;
+	}
+
+	&.is-loading {
+		pointer-events: none;
+
+		&::after {
+			background-color: rgba(0, 0, 0, 0.75);
+		}
+	}
+
+	@media (min-width: $break-md-min) {
+		//padding-bottom: 2rem;
+	}
+}
+
+.container__main--sidebar {
+	@media (min-width: $break-lg-min) {
+		margin-left: 280px;
+	}
+}

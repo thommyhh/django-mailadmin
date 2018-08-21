@@ -1,0 +1,27 @@
+{% set page = {
+	title: "Domains"
+} %}
+
+{% import '../mocking/domains.njk' as dummy with context %}
+{% import '../components/list/templates.njk' as list %}
+{% import '../components/filter/templates.njk' as filter %}
+{% import '../components/pagination/templates.njk' as pagination %}
+{% import '../components/loader/templates.njk' as loader %}
+
+{% extends "../templates/default.njk" %}
+
+{% block content %}
+	{% call list.container('/dummy/domains/list') %}
+		{% set dummyDomains = dummy.domains|sort(false, false, 'name')|groupby('name') %}
+		{{ filter.default('New domain', showSidebarButton = false) }}
+		{% call list.outer() %}
+			{% for domain,items in dummyDomains %}
+				{% if loop.index0 < 10 %}
+					{{ list.domain(domain, true) }}
+				{% endif %}
+			{% endfor %}
+		{% endcall %}
+		{{ pagination.default(dummyDomains|length/10) }}
+		{{ loader.default() }}
+	{% endcall %}
+{% endblock %}

@@ -1,24 +1,28 @@
-{% macro default(buttonText, placeHolder = "Search ...") %}
-  <div class="action-bar">
-    <div class="action-bar__group hide-lg hide-xl">
-      <button class="icon-button js-sidebar-button">
-        <svg class="icon-button__icon"><use xlink:href="{{ 'assets/icons.svg'|relative }}#menicon"/></svg>
-        <span class="sr-only">Open Menu</span>
-      </button>
-    </div>
+{% macro default(buttonText, placeHolder = "Search ...", showSidebarButton = true) %}
+    <div class="action-bar">
+        {% if showSidebarButton %}
+            <div class="action-bar__group hide-lg hide-xl">
+                <button class="icon-button js-sidebar-button">
+                    <svg class="icon-button__icon">
+                        <use xlink:href="{{ 'assets/icons.svg'|relative }}#menicon"/>
+                    </svg>
+                    <span class="sr-only">Open Menu</span>
+                </button>
+            </div>
+        {% endif %}
 
-    <div class="action-bar__group action-bar__group--flexible">
-      <form class="form">
-        <label for="filter" class="sr-only">{{ placeHolder }}</label>
-        <input type="search" id="filter" placeholder="{{ placeHolder }}" class="form__control form__control--input form__control--search form__control--single">
-      </form>
-    </div>
+        <div class="action-bar__group action-bar__group--flexible">
+            <form class="form">
+                <label for="filter" class="sr-only">{{ placeHolder }}</label>
+                <input type="search" id="filter" placeholder="{{ placeHolder }}" class="form__control form__control--input form__control--search form__control--single js-list-filter">
+            </form>
+        </div>
 
-    <div class="action-bar__group">
-      <button class="button button--icon">
-        <svg class="button__icon"><use xlink:href="{{ 'assets/icons.svg'|relative }}#add-icon"/></svg>
-        <span class="button__text  sr-only-xs">{{ buttonText }}</span>
-      </button>
+        <div class="action-bar__group">
+            <button class="button button--icon">
+                <svg class="button__icon"><use xlink:href="{{ 'assets/icons.svg'|relative }}#add-icon"/></svg>
+                <span class="button__text  sr-only-xs">{{ buttonText }}</span>
+            </button>
+        </div>
     </div>
-  </div>
 {% endmacro %}

@@ -1,0 +1,17 @@
+{% set page = {
+  title: "Loader",
+  description: "The loader animation"
+} %}
+
+{% import "./templates.njk" as loader %}
+
+{% extends "../../templates/components.njk" %}
+
+{% block body %}
+
+  {% section title="Default" %}
+    <div class="is-loading" style="position:relative; height: 200px; background-color: rgba(0, 0, 0, 0.75)">
+		{{ loader.default() }}
+	</div>
+  {% endsection %}
+{% endblock %}

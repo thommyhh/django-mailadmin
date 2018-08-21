@@ -27,12 +27,18 @@
 .notification {
 	display: flex;
 	align-items: center;
-	width: 100%;
 	padding: 0.6rem;
+	align-self: center;
+	position: absolute;
+	top: 0;
 
 	color: $color-white;
 
 	background-color: $color-shadow;
+
+	&.is-hidden {
+		display: none;
+	}
 
 	@media (min-width: $break-sm-min) {
 		min-height: 4em;
@@ -45,16 +51,25 @@
 
 .notification--success {
 	background-color: $color-green;
+
+	.notification__icon--success {
+		display: block;
+	}
 }
 
 .notification--error {
 	background-color: $color-orange;
+
+	.notification__icon--error {
+		display: block;
+	}
 }
 
 // NOTIFICATION ICON
 // =====================================
 
 .notification__icon {
+	display: none;
 	flex-shrink: 0;
 	width: 2em;
 	height: 2em;

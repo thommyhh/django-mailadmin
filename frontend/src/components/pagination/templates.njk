@@ -1,18 +1,56 @@
-{% macro default() %}
-  <nav class="pagination">
-    <div class="pagination__group pagination__group--pages">
-      <button class="button button--highlight  pagination__page">1</button>
-      <button class="button  pagination__page">2</button>
-      <button class="button  pagination__page">3</button>
-      <button class="button  pagination__page">4</button>
-      <button class="button  pagination__page">5</button>
-      <button class="button  pagination__page">6</button>
-      <button class="button  pagination__page">7</button>
+{% macro default(pages = 8, activePage = 1, numberOfButtons = 5) %}
+    {% set pages = pages|round(0, 'ceil') %}
+  <nav class="pagination js-pagination">
+    <div class="pagination__group pagination__group--pages js-pagination-buttons">
+        {% if numberOfButtons > pages %}
+            {% set numberOfButtons = pages %}
+        {% endif %}
+        {% set delta = (numberOfButtons / 2)|round(0, 'floor') %}
+        {% set visibleRangeStart = activePage - delta %}
+        {% set visibleRangeEnd = activePage + delta %}
+        {% if numberOfPages % 2 == 0 %}
+            {% set visibleRangeEnd = visibleRangeEnd - 1 %}
+        {% endif %}
+        {% if visibleRangeStart < 1 %}
+            {% set visibleRangeEnd = visibleRangeEnd - visibleRangeStart + 1 %}
+        {% endif %}
+        {% if visibleRangeEnd > pages %}
+            {% set visibleRangeStart = visibleRangeStart - visibleRangeEnd + pages %}
+        {% endif %}
+        {% if 1 > visibleRangeStart %}
+            {% set visibleRangeStart = 1 %}
+        {% endif %}
+        {% if pages < visibleRangeEnd %}
+            {% set visibleRangeEnd = pages %}
+        {% endif %}
+        {% if visibleRangeStart > 2 %}
+            {% set hasLess = true %}
+        {% endif %}
+        {% if visibleRangeEnd + 1 < pages %}
+            {% set hasMore = true %}
+        {% endif %}
+        {% for i in range(1, pages + 1) %}
+            {% if i >= visibleRangeStart  and i <= visibleRangeEnd %}
+                {% if i == visibleRangeStart and visibleRangeStart != 1 %}
+                    <button class="button pagination__page js-pagination-button" data-page="1">1</button>
+                    {% if hasLess %}
+                        <span class="pagination__page">...</span>
+                    {% endif %}
+                {% endif %}
+                <button class="button{{ ' button--highlight' if i == activePage }} pagination__page js-pagination-button" data-page="{{ i if i > 1 else 'null' }}">{{ i }}</button>
+                {% if i == visibleRangeEnd and visibleRangeEnd != pages%}
+                    {% if hasMore %}
+                        <span class="pagination__page">...</span>
+                    {% endif %}
+                    <button class="button pagination__page js-pagination-button" data-page="{{ pages }}">{{ pages }}</button>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
     </div>
 
     <div class="pagination__group pagination__group--settings">
       <label for="elements-per-page" class="form__label pagination__label">Elements per Page</label>
-      <select id="elements-per-page" class="form__control form__control--select pagination__items-per-page">
+      <select id="elements-per-page" class="form__control form__control--select pagination__items-per-page js-pagination-size">
         <option value="5">5</option>
         <option value="10" selected>10</option>
         <option value="15">15</option>

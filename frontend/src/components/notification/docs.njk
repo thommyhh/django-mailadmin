@@ -1,6 +1,6 @@
 {% set page = {
-  title: "Notification",
-  description: "Different types of notifications"
+	title: "Notification",
+	description: "Different types of notifications"
 } %}
 
 {% import "./templates.njk" as notification %}
@@ -9,11 +9,37 @@
 
 {% block body %}
 
-  {% section title="Success" %}
-    {{ notification.success("Settings saved", "New settings for domain awesome-pictures.net successfully saved.") }}
-  {% endsection %}
+	{% section title="Success" %}
+		<div style="position: relative; height: 75px; display: flex; flex-flow: column;">
+			{{ notification.success("Settings saved", "New settings for domain awesome-pictures.net successfully saved.") }}
+		</div>
+	{% endsection %}
 
-  {% section title="Error" %}
-    {{ notification.error("An error occurred", "The settings could not be saved.") }}
-  {% endsection %}
+	{% section title="Error" %}
+		<div style="position: relative; height: 75px;  display: flex; flex-flow: column;">
+			{{ notification.error("An error occurred", "The settings could not be saved.") }}
+		</div>
+	{% endsection %}
+
+	{% section title="Dynamic" %}
+		<div style="position: relative; overflow: hidden; display: flex; flex-flow: column;">
+			<div style="margin-top: 150px;">
+				<button class="button js-button-notification-success">Create success message</button>
+				<button class="button button--highlight js-button-notification-error">Create error message</button>
+			</div>
+			{{ notification.default(hidden = true) }}
+			<script type="application/javascript">
+				let notificationElement = document.currentScript.previousElementSibling
+				document.addEventListener('DOMContentLoaded', () => {
+					let notification = new Message(notificationElement)
+					document.querySelector('.js-button-notification-success').addEventListener('click', () => {
+						notification.show('Success message', 'You have successfully done something', 'success')
+					})
+					document.querySelector('.js-button-notification-error').addEventListener('click', () => {
+						notification.show('Error message', 'You failed', 'error')
+					})
+				})
+			</script>
+		</div>
+	{% endsection %}
 {% endblock %}

@@ -63,6 +63,11 @@ $break-xxl-min: $break-xxl; // 1888px;
 $z-index-nav-cover: 700;
 $z-index-nav-sidebar: 800;
 $z-index-dropdown: 900;
-$z-index-header: 1000;
 $z-index-footer: 1000;
 $z-index-notification: 2000;
+
+/* ***********
+ * Animation *
+ * ********* */
+$animation-duration: 0.3s;
+$animation-type: ease;

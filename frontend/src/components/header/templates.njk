@@ -10,13 +10,7 @@
     <div class="action-bar__group action-bar__group--flexible action-bar__group--top"></div>
 
     <div class="action-bar__group action-bar__group--shrink">
-      {% call dropdown.list("Search domain", url = "/dummy/data/domains") %}
-        {{ dropdown.item("Domain 1") }}
-        {{ dropdown.item("Domain 2") }}
-        {{ dropdown.item("Domain 3") }}
-        {{ dropdown.item("Domain 4") }}
-        {{ dropdown.item("Domain 5") }}
-      {% endcall %}
+      {{ dropdown.list("Search domain", url = "/dummy/data/domains") }}
     </div>
 
     <div class="action-bar__group">

@@ -4,6 +4,11 @@
 
 // LIST CONTAINER
 // =====================================
+.list-wrapper {
+	flex-shrink: 1;
+	flex-grow: 1;
+	overflow-y: scroll;
+}
 
 .list {
 	margin: 0;
@@ -19,7 +24,7 @@
 	position: relative;
 	padding: 0.6rem;
 
-	&::after {
+	&:not(:last-child)::after {
 		content: "";
 		position: absolute;
 		height: 1px;
@@ -207,7 +212,6 @@
 
 .list__item .form__checkbox-label {
 	margin-bottom: 0;
-	text-transform: uppercase;
 }
 
 // Button

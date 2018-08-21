@@ -8,6 +8,8 @@
 	align-items: center;
 	position: relative;
 	padding: 0.6rem;
+	flex-grow: 0;
+	flex-shrink: 0;
 
 	background-color: $color-mist;
 
