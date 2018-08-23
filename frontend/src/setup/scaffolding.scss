@@ -81,6 +81,7 @@ body {
 	@media (min-width: $break-lg-min) {
 		width: 280px;
 		transform: none;
+		position: static;
 	}
 }
 
@@ -90,11 +91,10 @@ body {
 	flex-shrink: 1;
 	flex-grow: 1;
 	display: flex;
-	flex-flow: column nowrap;
+	flex-flow: row nowrap;
 }
 
 .container__main {
-	height: 100%;
 	overflow: hidden;
 	display: flex;
 	flex-flow: column nowrap;

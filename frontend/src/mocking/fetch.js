@@ -1,7 +1,9 @@
 import dropDownTemplateCode from './templates/dropDown'
 import domainTemplateCode from './templates/domains'
+import accountTemplateCode from './templates/accounts'
 import paginationTemplateCode from './templates/pagination'
 import getDummyDomains from './data/domains'
+import getDummyUsers from './data/usernames'
 import fetchMock from 'fetch-mock'
 
 let nunjucks = require('nunjucks')
@@ -10,6 +12,7 @@ nunjucks.configure({
 })
 let dropDownResultTemplate = nunjucks.compile(dropDownTemplateCode())
 let domainListTemplate = nunjucks.compile(domainTemplateCode())
+let accountListTemplate = nunjucks.compile(accountTemplateCode())
 let paginationTemplate = nunjucks.compile(paginationTemplateCode())
 
 let delay = (min, max) => {
@@ -58,6 +61,39 @@ fetchMock.mock('begin:/dummy/domains/list', (url, options) => {
 
 		return {
 			list: domainListTemplate.render({results: results}),
+			pagination: paginationTemplate.render({pages: pages, activePage: page, numberOfButtons: 5})
+		}
+	})
+})
+fetchMock.mock('begin:/dummy/accounts/list', (url, options) => {
+	return delay(200, 1000).then(() => {
+		let query = options.body.query
+		let page = parseInt(options.body.page)
+		let itemsPerPage = parseInt(options.body.itemsPerPage)
+		// Throw an error on page 6
+		if (page === 6) {
+			return {
+				status: 500
+			}
+		} else if (page === 7) {
+			throw new TypeError('Simulated network error')
+		}
+		let results = []
+		let users = getDummyUsers()
+		let domain = getDummyDomains()[Math.round(Math.random() * (users.length - 1))]
+		for (let user of users) {
+			if ((query === null || user.indexOf(query) > -1) && results.indexOf(user) === -1) {
+				results.push(user)
+			}
+		}
+		results.sort()
+		let start = Math.max(0, (page - 1) * itemsPerPage)
+		let end = start + itemsPerPage
+		let pages = Math.ceil(results.length / itemsPerPage)
+		results = results.slice(start, end)
+
+		return {
+			list: accountListTemplate.render({results: results, domain: domain}),
 			pagination: paginationTemplate.render({pages: pages, activePage: page, numberOfButtons: 5})
 		}
 	})

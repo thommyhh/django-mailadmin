@@ -1,0 +1,32 @@
+{% set page = {
+	title: "Accounts"
+} %}
+
+{% import '../mocking/domains.njk' as dummyDomains with context %}
+{% import '../mocking/usernames.njk' as dummyUsers with context %}
+{% import '../components/list/templates.njk' as list %}
+{% import '../components/filter/templates.njk' as filter %}
+{% import '../components/pagination/templates.njk' as pagination %}
+{% import '../components/loader/templates.njk' as loader %}
+{% import '../components/left-menu/templates.njk' as navLeft %}
+
+{% extends "../templates/default.njk" %}
+
+{% block content %}
+	<aside class="container__sidebar js-sidebar">
+		{{ navLeft.dummy() }}
+	</aside>
+	{% call list.container('/dummy/accounts/list') %}
+		{% set domain = dummyDomains.domains|random %}
+		{{ filter.default('New account') }}
+		{% call list.outer() %}
+			{% for user in dummyUsers.usernames %}
+				{% if loop.index0 < 10 %}
+					{{ list.account(user, domain, true) }}
+				{% endif %}
+			{% endfor %}
+		{% endcall %}
+		{{ pagination.default(dummyUsers.usernames|length/10) }}
+		{{ loader.default() }}
+	{% endcall %}
+{% endblock %}
